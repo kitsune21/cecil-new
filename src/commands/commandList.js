@@ -162,5 +162,19 @@ export const allCommands = [
         description: 'Will open a new tab at the specified site. ie. goto journeys will send you to Journeys.Cafe',
         type: 'simple',
         process: (currentId => addAPromptObj(currentId, 'Please check your selection.'))
+    },
+    {
+        command: 'social',
+        description: 'Shows you where to find me on Social Media.',
+        type: 'multi',
+        process: (currentId) => {
+            return [
+                addAPromptObj(currentId, '______Social Media______'),
+                addAPromptObj(currentId + 1, 'Twitter: @KiTsuNe76'),
+                addAPromptObj(currentId + 2, 'Instagram: journeys.cafe'),
+                addAPromptObj(currentId + 3, 'Email: me@cecil-thomas.com'),
+                addAPromptObj(currentId + 4, 'GitHub: kitsune21'),
+            ]
+        },
     }
 ]
