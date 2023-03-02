@@ -22,6 +22,7 @@ const Text = styled.p`
 
 const PromptBox = styled.form`
   margin-top: 5px;
+  margin-bottom: 10px;
   width: 100%;
 `
 
@@ -52,6 +53,8 @@ function App() {
       const checkCommandRegex = new RegExp(currentCommand.regex)
       if(checkCommandRegex.test(value)) {
         setPromptText(value)
+      } else if(value === '') {
+        setPromptText(value)
       }
     } else {
       setPromptText(value)
@@ -65,68 +68,81 @@ function App() {
 
   function processCommand() {
     let promptId = promptList.length + 1
+    let promptsToAdd = []
+    let isClear = false
     const userPrompt = {
       id: promptId,
-      prompt: `${userPreText}${promptText}`
+      prompt: promptText,
+      source: 'user'
     }
+    promptsToAdd.push(userPrompt)
     promptId += 1
-    const commandLower = promptText.toLocaleLowerCase()
+    const commandLower = promptText.toLocaleLowerCase().trim()
     if(appState === 'standard') {
-      const myCommand = findCommand(commandLower)
+      const myCommand = findCommand(commandLower, promptId)
       if(myCommand.type === 'simple') {
-       const newPrompt = {
-          id: promptId,
-          prompt: `${commandPreText}${myCommand.process()}`
-        }
-        setPromptList([...promptList, userPrompt, newPrompt])
-        setPromptText('')
+        const newPrompt = myCommand.process(promptId)
+        promptsToAdd.push(newPrompt)
       } else if(myCommand.type === 'complex') {
         if(myCommand.command === 'clear') {
           myCommand.process(() => {
-            setPromptList([])
             setAppState('standard')
+            isClear = true
           })
         } else if(myCommand.command === 'list') {
           myCommand.process(() => {
             let listOfCommands = []
-            allCommands.forEach((entry, i) => {
-              let listEntry = {
-                id: promptId,
-                prompt: `${commandPreText}${entry.command} - ${entry.description}`
+            allCommands.forEach(entry => {
+              if(!entry.hide) {
+                let listEntry = {
+                  id: promptId,
+                  prompt: `${entry.command} - ${entry.description}`,
+                  source: 'system'
+                }
+                promptId += 1
+                listOfCommands.push(listEntry)
               }
-              promptId += 1
-              listOfCommands.push(listEntry)
             })
-            setPromptList([...promptList, userPrompt, ...listOfCommands])
+            promptsToAdd.push(...listOfCommands)
           })
-        } else if(myCommand.command === 'calculate') {
+        } else {
           myCommand.process(() => {
             const instructionEntry = {
               id: promptId,
-              prompt: `${commandPreText}${myCommand.description}`
+              prompt: myCommand.description,
+              source: 'system'
             }
-            setPromptList([...promptList, userPrompt, instructionEntry])
+            promptsToAdd.push(instructionEntry)
             setAppState('await')
             setCurrentCommand(myCommand)
           })
-        }
-      }
+        } 
+      } else if(myCommand.type === 'multi') {
+        let multiPrompts = myCommand.process(promptId)
+        promptsToAdd.push(...multiPrompts)
+        promptId += multiPrompts.length + 2
+      } 
     } else if(appState === 'await') {
       let result = currentCommand.awaitCommand(promptText)
       const resultPrompt = {
         id: promptId,
-        prompt: `${commandPreText}Result: ${result}`
+        prompt: `Result: ${result}`
       }
-      setPromptList([...promptList, userPrompt, resultPrompt])
+      promptsToAdd.push(resultPrompt)
       setAppState('standard')
       setCurrentCommand(null)
+    }
+    if(!isClear) {
+      setPromptList([...promptList, ...promptsToAdd])
+    } else {
+      setPromptList([])
     }
     setPromptText('')
   }
 
-  function findCommand(command) {
+  function findCommand(command, currentId) {
     let foundCommand = {
-      process: () => `Invalid Command. '${command}' does not exist.`,
+      process: () => {return { id: currentId, prompt: `Invalid Command. '${command}' does not exist.`,}},
       type: 'simple'
     }
     allCommands.forEach(entry => {
@@ -146,7 +162,7 @@ function App() {
           <Text>Commands are not case-sensitive.</Text>
           {
             promptList.map(prompt =>
-              <Text key={prompt.id}>{prompt.prompt}</Text>
+              <Text key={prompt.id}>{prompt.source === 'user' ? userPreText : commandPreText}{prompt.prompt}</Text>
             )
           }
           <PromptBox onSubmit={handlePromptSubmit}>
