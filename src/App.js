@@ -90,9 +90,12 @@ function App() {
     const value = e.target.value
     if(appState === 'await') {
       const checkCommandRegex = new RegExp(currentCommand.regex)
+      const exitRegex = new RegExp(/e?x?i?t?/)
       if(checkCommandRegex.test(value)) {
         setPromptText(value)
       } else if(value === '') {
+        setPromptText(value)
+      } else if(exitRegex.test(value)) {
         setPromptText(value)
       }
     } else {
@@ -162,12 +165,20 @@ function App() {
         promptId += multiPrompts.length + 2
       } 
     } else if(appState === 'await') {
-      let result = currentCommand.awaitCommand(promptText)
-      const resultPrompt = {
-        id: promptId,
-        prompt: `Result: ${result}`
+      if(promptText === 'exit') {
+        const exitPrompt = {
+          id: promptId,
+          prompt: 'Exiting...'
+        }
+        promptsToAdd.push(exitPrompt)
+      } else {
+        let result = currentCommand.awaitCommand(promptText)
+        const resultPrompt = {
+          id: promptId,
+          prompt: `Result: ${result}`
+        }
+        promptsToAdd.push(resultPrompt)
       }
-      promptsToAdd.push(resultPrompt)
       setAppState('standard')
       setCurrentCommand(null)
     }

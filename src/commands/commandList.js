@@ -52,7 +52,7 @@ export const allCommands = [
     },
     {
         command: 'calculate',
-        description: 'Input a simple math expression such as: 1+2, 5-3, 7*8, etc.',
+        description: 'Input a simple math expression such as: 1+2, 5-3, 7*8, etc. Type "exit" to quit out.',
         process: (upperProcess) => {upperProcess()},
         awaitCommand: expression => {
             const numbersList = expression.match(new RegExp(/[0-9]+/g))
@@ -73,7 +73,7 @@ export const allCommands = [
     },
     {
         command: 'calculate weather f',
-        description: 'Input the celsius value, and it will output the farenheight.',
+        description: 'Input the celsius value, and it will output the farenheight. Type "exit" to quit out.',
         process: (upperProcess) => {upperProcess()},
         type: 'complex',
         regex: /^-?\d+(\.\d*)?$/,
@@ -83,7 +83,7 @@ export const allCommands = [
     },
     {
         command: 'calculate weather c',
-        description: 'Input the farenheight value, and it will output the celsius.',
+        description: 'Input the farenheight value, and it will output the celsius. Type "exit" to quit out.',
         process: (upperProcess) => {upperProcess()},
         type: 'complex',
         regex: /^-?\d+(\.\d*)?$/,
