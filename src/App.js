@@ -1,16 +1,54 @@
 import React, { useState } from 'react'
 import { allCommands } from './commands/commandList'
-import styled from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
+import RobotoCondensed from './fonts/RobotoCondensed-Regular.ttf'
+import EBGaramond from './fonts/RobotoCondensed-Regular.ttf'
+
+// eslint-disable-next-line no-unused-vars
+const GlobalStyles = createGlobalStyle`
+@font-face {
+  src: url(${RobotoCondensed}) format('ttf');
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  src: url(${EBGaramond}) format('ttf');
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+}
+`
 
 const Computer = styled.div`
-  border: 20px solid beige;
+  padding: 20px;
+  border: 2px solid black;
+  border-bottom: none;
+  border-radius: 12px 12px 0 0;
+  background-color: beige;
   height: 85vh;
+  margin: 10px 10px 0 10px;
 `
 
 const ComputerMonitor = styled.div`
   height: 100%;
   background-color: black;
   overflow-y: auto;
+  border: 1px solid black;
+  border-radius: 8px;
+`
+
+const ComputerBottom = styled.div`
+  display: flex;
+  justify-content: center;
+  background-color: beige;
+  height: 50px;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+  border-left: 2px solid black;
+  border-radius: 0 0 12px 12px;
+  margin: 0 10px 0 10px;
+  font-family: EBGaramond;
 `
 
 const Text = styled.p`
@@ -18,6 +56,7 @@ const Text = styled.p`
   margin: 0;
   padding-left: 10px;
   padding-top: 5px;
+  font-family: Roboto Condensed;
 `
 
 const PromptBox = styled.form`
@@ -171,6 +210,9 @@ function App() {
           </PromptBox>
         </ComputerMonitor>
       </Computer>
+      <ComputerBottom>
+        Thomas Computer Systems v1.0
+      </ComputerBottom>
     </div>
   );
 }
