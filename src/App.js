@@ -83,6 +83,7 @@ function App() {
   const [promptList, setPromptList] = useState([])
   const [appState, setAppState] = useState('standard')
   const [currentCommand, setCurrentCommand] = useState(null)
+  const [arrowSelect, setArrowSelect] = useState(0)
   const commandPreText = '--  '
   const userPreText = '@ '
 
@@ -90,7 +91,7 @@ function App() {
     const value = e.target.value
     if(appState === 'await') {
       const checkCommandRegex = new RegExp(currentCommand.regex)
-      const exitRegex = new RegExp(/e?x?i?t?/)
+      const exitRegex = new RegExp(/^e?x?i?t?$/)
       if(checkCommandRegex.test(value)) {
         setPromptText(value)
       } else if(value === '') {
@@ -115,7 +116,7 @@ function App() {
     const userPrompt = {
       id: promptId,
       prompt: promptText,
-      source: 'user'
+      source: appState === 'await' ? 'response' : 'user'
     }
     promptsToAdd.push(userPrompt)
     promptId += 1
@@ -129,6 +130,7 @@ function App() {
         if(myCommand.command === 'clear') {
           myCommand.process(() => {
             setAppState('standard')
+            setArrowSelect(0)
             isClear = true
           })
         } else if(myCommand.command === 'list') {
@@ -168,14 +170,16 @@ function App() {
       if(promptText === 'exit') {
         const exitPrompt = {
           id: promptId,
-          prompt: 'Exiting...'
+          prompt: 'Exiting...',
+          source: 'system'
         }
         promptsToAdd.push(exitPrompt)
       } else {
         let result = currentCommand.awaitCommand(promptText)
         const resultPrompt = {
           id: promptId,
-          prompt: `Result: ${result}`
+          prompt: `Result: ${result}`,
+          source: 'system'
         }
         promptsToAdd.push(resultPrompt)
       }
@@ -192,7 +196,7 @@ function App() {
 
   function findCommand(command, currentId) {
     let foundCommand = {
-      process: () => {return { id: currentId, prompt: `Invalid Command. '${command}' does not exist.`,}},
+      process: () => {return { id: currentId, prompt: `Invalid Command. '${command}' does not exist.`, source: 'system'}},
       type: 'simple'
     }
     allCommands.forEach(entry => {
@@ -201,6 +205,26 @@ function App() {
       }
     })
     return foundCommand
+  }
+
+  function handleKeyDown(e) {
+    if(promptList.length === 0 || appState === 'await') {
+      return
+    }
+    const filteredPromptList = promptList.slice(0).filter(prompt => prompt.source === 'user').reverse()
+    if (e.code === "ArrowUp") { 
+      if(filteredPromptList.length < arrowSelect + 1) {
+        return
+      }
+      setArrowSelect(arrowSelect + 1)
+      setPromptText(filteredPromptList[arrowSelect].prompt)
+    } else if(e.code === "ArrowDown") {
+      if(arrowSelect - 1 < 0) {
+        return
+      }
+      setPromptText(filteredPromptList[arrowSelect - 1].prompt)
+      setArrowSelect(arrowSelect - 1)
+    }
   }
 
   return (
@@ -216,7 +240,7 @@ function App() {
             )
           }
           <PromptBox onSubmit={handlePromptSubmit}>
-            <PromptPreText htmlFor='prompt'>$<Prompt id='prompt' value={promptText} onChange={handlePromptText} autoFocus/></PromptPreText>
+            <PromptPreText htmlFor='prompt'>$<Prompt id='prompt' value={promptText} onChange={handlePromptText} autoFocus onKeyDown={handleKeyDown}/></PromptPreText>
             <button type='submit' hidden/>
           </PromptBox>
         </ComputerMonitor>
