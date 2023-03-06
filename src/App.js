@@ -33,7 +33,7 @@ const Computer = styled.div`
 
 const ComputerMonitor = styled.div`
   height: 100%;
-  background-color: black;
+  background-color: ${props => `rgb(${props.backgroundColor}, ${props.backgroundColor}, ${props.backgroundColor})`};
   overflow-y: auto;
   border: 1px solid black;
   border-radius: 8px;
@@ -56,6 +56,7 @@ const ComputerBottom = styled.div`
 const KnobRow = styled.div`
   display: flex;
   justify-content: flex-end;
+  gap: 10px;
   width: 90%;
 `
 
@@ -75,7 +76,7 @@ const PromptBox = styled.form`
 
 const Prompt = styled.input`
   border: none;
-  background-color: black;
+  background-color: ${props => `rgb(${props.backgroundColor}, ${props.backgroundColor}, ${props.backgroundColor})`};
   color: white;
   margin-left: 5px;
 `
@@ -93,6 +94,7 @@ function App() {
   const [currentCommand, setCurrentCommand] = useState(null)
   const [arrowSelect, setArrowSelect] = useState(0)
   const [textColor, setTextColor] = useState(204)
+  const [backgroundColor, setBackgroundColor] = useState(0)
   const commandPreText = '--  '
   const userPreText = '@ '
 
@@ -239,7 +241,7 @@ function App() {
   return (
     <div className="App">
       <Computer>
-        <ComputerMonitor>
+        <ComputerMonitor backgroundColor={backgroundColor}>
           <Text textColor={textColor}>WELCOME TO CECIL.OS!</Text>
           <Text textColor={textColor}>Use the "list" command to see what I can do!</Text>
           <Text textColor={textColor}>Commands are not case-sensitive.</Text>
@@ -249,7 +251,7 @@ function App() {
             )
           }
           <PromptBox onSubmit={handlePromptSubmit}>
-            <PromptPreText htmlFor='prompt' textColor={textColor}>$<Prompt id='prompt' value={promptText} onChange={handlePromptText} autoFocus onKeyDown={handleKeyDown}/></PromptPreText>
+            <PromptPreText htmlFor='prompt' textColor={textColor}>$<Prompt id='prompt' value={promptText} onChange={handlePromptText} autoFocus onKeyDown={handleKeyDown} backgroundColor={backgroundColor}/></PromptPreText>
             <button type='submit' hidden/>
           </PromptBox>
         </ComputerMonitor>
@@ -257,7 +259,8 @@ function App() {
       <ComputerBottom>
         Thomas Computer Systems v1.0
         <KnobRow>
-          <Knob label='Contrast' textColor={textColor} setTextColor={setTextColor} min={0} max={255}/>
+          <Knob label='Color' value={textColor} setValue={setTextColor} min={0} max={256}/>
+          <Knob label='Contrast' value={backgroundColor} setValue={setBackgroundColor} min={0} max={256}/>
         </KnobRow>
       </ComputerBottom>
     </div>

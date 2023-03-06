@@ -22,17 +22,17 @@ const KnobButton = styled.button`
     background-color: beige;
 `
 
-const Knob = ({label, textColor, setTextColor, min, max}) => {
+const Knob = ({label, value, setValue, min, max}) => {
 
     function handleAddButton() {
-        if(textColor < max) {
-            setTextColor(textColor + (0.05 * max))
+        if(value < max) {
+            setValue(value + (0.05 * max))
         }
     }
 
     function handleMinusButton() {
-        if(textColor > min) {
-            setTextColor(textColor - (0.05 * max))
+        if(value > min) {
+            setValue(value - (0.05 * max))
         }
     }
 
