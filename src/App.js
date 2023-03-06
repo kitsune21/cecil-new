@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { allCommands } from './commands/commandList'
 import styled, { createGlobalStyle } from 'styled-components'
+import Knob from './components/Knob'
 import RobotoCondensed from './fonts/RobotoCondensed-Regular.ttf'
 import EBGaramond from './fonts/RobotoCondensed-Regular.ttf'
 
@@ -40,7 +41,8 @@ const ComputerMonitor = styled.div`
 
 const ComputerBottom = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   background-color: beige;
   height: 50px;
   border-bottom: 2px solid black;
@@ -51,8 +53,14 @@ const ComputerBottom = styled.div`
   font-family: EBGaramond;
 `
 
+const KnobRow = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 90%;
+`
+
 const Text = styled.p`
-  color: green;
+  color: rgb(0, ${props => props.textColor}, 0);
   margin: 0;
   padding-left: 10px;
   padding-top: 5px;
@@ -73,7 +81,7 @@ const Prompt = styled.input`
 `
 
 const PromptPreText = styled.label`
-  color: green;
+  color: rgb(0, ${props => props.textColor}, 0);
   margin-left: 10px;
 `
 
@@ -84,6 +92,7 @@ function App() {
   const [appState, setAppState] = useState('standard')
   const [currentCommand, setCurrentCommand] = useState(null)
   const [arrowSelect, setArrowSelect] = useState(0)
+  const [textColor, setTextColor] = useState(204)
   const commandPreText = '--  '
   const userPreText = '@ '
 
@@ -231,22 +240,25 @@ function App() {
     <div className="App">
       <Computer>
         <ComputerMonitor>
-          <Text>WELCOME TO CECIL.OS!</Text>
-          <Text>Use the "list" command to see what I can do!</Text>
-          <Text>Commands are not case-sensitive.</Text>
+          <Text textColor={textColor}>WELCOME TO CECIL.OS!</Text>
+          <Text textColor={textColor}>Use the "list" command to see what I can do!</Text>
+          <Text textColor={textColor}>Commands are not case-sensitive.</Text>
           {
             promptList.map(prompt =>
-              <Text key={prompt.id}>{prompt.source === 'user' ? userPreText : commandPreText}{prompt.prompt}</Text>
+              <Text key={prompt.id} textColor={textColor}>{prompt.source === 'user' ? userPreText : commandPreText}{prompt.prompt}</Text>
             )
           }
           <PromptBox onSubmit={handlePromptSubmit}>
-            <PromptPreText htmlFor='prompt'>$<Prompt id='prompt' value={promptText} onChange={handlePromptText} autoFocus onKeyDown={handleKeyDown}/></PromptPreText>
+            <PromptPreText htmlFor='prompt' textColor={textColor}>$<Prompt id='prompt' value={promptText} onChange={handlePromptText} autoFocus onKeyDown={handleKeyDown}/></PromptPreText>
             <button type='submit' hidden/>
           </PromptBox>
         </ComputerMonitor>
       </Computer>
       <ComputerBottom>
         Thomas Computer Systems v1.0
+        <KnobRow>
+          <Knob label='Contrast' textColor={textColor} setTextColor={setTextColor} min={0} max={255}/>
+        </KnobRow>
       </ComputerBottom>
     </div>
   );
