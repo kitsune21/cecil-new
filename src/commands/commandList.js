@@ -177,5 +177,20 @@ export const allCommands = [
                 addAPromptObj(currentId + 4, 'GitHub: kitsune21'),
             ]
         },
+    },
+    {
+        command: 'books',
+        description: 'Shows some books that I like.',
+        type: 'multi',
+        process: (currentId) => {
+            return [
+                addAPromptObj(currentId, '______Books______'),
+                addAPromptObj(currentId + 1, "Ender's Game - Orson Scott Card: I love sci-fi, and this is an interesting future."),
+                addAPromptObj(currentId + 2, 'Endurance - Alfred Lansing: An amazing story about dealing with failure after failure, and somehow surviving it all.'),
+                addAPromptObj(currentId + 3, 'The Lord of the Rings - JRR Tolkien: Man this book is dense. But it is so worth the read.'),
+                addAPromptObj(currentId + 4, 'The Art of Learning - Josh Waitzkin: This is a very interesting read. Josh is a chess prodigy (the kid from "Searching for Bobby Fisher"), and a world champion martial artist.'),
+                addAPromptObj(currentId + 5, 'Personal Memoirs of Ulysses S. Grant: This mostly deals with his military career. He talks about the Civil War and shares a lot of stories that you wouldn\'t learn in history class.'),
+            ]
+        },
     }
 ]
