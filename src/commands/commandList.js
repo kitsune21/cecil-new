@@ -1,5 +1,17 @@
 import { processAbout } from "./about"
 
+function downloadResume() {
+    fetch('Resume.pdf').then(response => {
+        response.blob().then(blob => {
+            const fileURL = window.URL.createObjectURL(blob);
+            let alink = document.createElement('a');
+            alink.href = fileURL;
+            alink.download = 'Cecil-Thomas-Resume.pdf';
+            alink.click();
+        })
+    })
+}
+
 function addAPromptObj(currentId, prompt) {
     return {
         id: currentId,
@@ -191,6 +203,15 @@ export const allCommands = [
                 addAPromptObj(currentId + 4, 'The Art of Learning - Josh Waitzkin: This is a very interesting read. Josh is a chess prodigy (the kid from "Searching for Bobby Fisher"), and a world champion martial artist.'),
                 addAPromptObj(currentId + 5, 'Personal Memoirs of Ulysses S. Grant: This mostly deals with his military career. He talks about the Civil War and shares a lot of stories that you wouldn\'t learn in history class.'),
             ]
+        },
+    },
+    {
+        command: 'download resume',
+        description: 'Downloads the resume.',
+        type: 'simple',
+        process: (currentId) => {
+            downloadResume()
+            return addAPromptObj(currentId, 'Downloading...')
         },
     }
 ]
