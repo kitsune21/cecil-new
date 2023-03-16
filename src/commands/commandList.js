@@ -251,9 +251,11 @@ export const allCommands = [
             const startDelay = 0
             const addDelay = 400
             let currentDelay = startDelay
+            const audioContextList = []
             notesList.forEach(note => {
                 setTimeout(() => {
                     const context = new AudioContext()
+                    audioContextList.push(context)
                     const o = context.createOscillator()
                     o.frequency.value = 0
                     o.type = 'square'
@@ -264,7 +266,32 @@ export const allCommands = [
                 }, currentDelay)
                 currentDelay += addDelay
             })
+            audioContextList.forEach(context => {
+                context.close()
+            })
             return 'Playing...'
+        }
+    },
+    {
+        command: 'play a song',
+        description: 'Will play a random song.',
+        type: 'simple',
+        process: (currentId) => {
+            const songs = [
+                'bd5agabd5abd5a5g5d5c5ba',
+                'ccegecddffb3ccegecddb3b3c',
+                'a5b5c6a5b5c6b5a5e5g5a5',
+                'fabfabfabe5d5bc5bge',
+                'c5c5c5af5',
+                'eeecgecgebbbc5gecge'
+            ]
+            const randomSong = Math.floor(Math.random() * songs.length)
+            allCommands.forEach(command => {
+                if(command.command === "write song") {
+                    command.awaitCommand(songs[randomSong])
+                }
+            })
+            return addAPromptObj(currentId, 'Playing...')
         }
     }
 ]
