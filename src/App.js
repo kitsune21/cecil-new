@@ -33,7 +33,8 @@ const Computer = styled.div`
 
 const ComputerMonitor = styled.div`
   height: 100%;
-  background-color: ${props => `rgb(${props.backgroundColor}, ${props.backgroundColor}, ${props.backgroundColor})`};
+  background-color: ${(props) =>
+    `rgb(${props.backgroundColor}, ${props.backgroundColor}, ${props.backgroundColor})`};
   overflow-y: auto;
   border: 1px solid black;
   border-radius: 8px;
@@ -61,7 +62,7 @@ const KnobRow = styled.div`
 `
 
 const Text = styled.p`
-  color: rgb(0, ${props => props.textColor}, 0);
+  color: rgb(0, ${(props) => props.textColor}, 0);
   margin: 0;
   padding-left: 10px;
   padding-top: 5px;
@@ -76,18 +77,18 @@ const PromptBox = styled.form`
 
 const Prompt = styled.input`
   border: none;
-  background-color: ${props => `rgb(${props.backgroundColor}, ${props.backgroundColor}, ${props.backgroundColor})`};
+  background-color: ${(props) =>
+    `rgb(${props.backgroundColor}, ${props.backgroundColor}, ${props.backgroundColor})`};
   color: white;
   margin-left: 5px;
 `
 
 const PromptPreText = styled.label`
-  color: rgb(0, ${props => props.textColor}, 0);
+  color: rgb(0, ${(props) => props.textColor}, 0);
   margin-left: 10px;
 `
 
 function App() {
-
   const [promptText, setPromptText] = useState('')
   const [promptList, setPromptList] = useState([])
   const [appState, setAppState] = useState('standard')
@@ -100,14 +101,14 @@ function App() {
 
   function handlePromptText(e) {
     const value = e.target.value
-    if(appState === 'await') {
+    if (appState === 'await') {
       const checkCommandRegex = new RegExp(currentCommand.regex)
       const exitRegex = new RegExp(/^e?x?i?t?$/)
-      if(checkCommandRegex.test(value)) {
+      if (checkCommandRegex.test(value)) {
         setPromptText(value)
-      } else if(value === '') {
+      } else if (value === '') {
         setPromptText(value)
-      } else if(exitRegex.test(value)) {
+      } else if (exitRegex.test(value)) {
         setPromptText(value)
       }
     } else {
@@ -127,32 +128,32 @@ function App() {
     const userPrompt = {
       id: promptId,
       prompt: promptText,
-      source: appState === 'await' ? 'response' : 'user'
+      source: appState === 'await' ? 'response' : 'user',
     }
     promptsToAdd.push(userPrompt)
     promptId += 1
     const commandLower = promptText.toLocaleLowerCase().trim()
-    if(appState === 'standard') {
+    if (appState === 'standard') {
       const myCommand = findCommand(commandLower, promptId)
-      if(myCommand.type === 'simple') {
+      if (myCommand.type === 'simple') {
         const newPrompt = myCommand.process(promptId)
         promptsToAdd.push(newPrompt)
-      } else if(myCommand.type === 'complex') {
-        if(myCommand.command === 'clear') {
+      } else if (myCommand.type === 'complex') {
+        if (myCommand.command === 'clear') {
           myCommand.process(() => {
             setAppState('standard')
             setArrowSelect(0)
             isClear = true
           })
-        } else if(myCommand.command === 'list') {
+        } else if (myCommand.command === 'list') {
           myCommand.process(() => {
             let listOfCommands = []
-            allCommands.forEach(entry => {
-              if(!entry.hide) {
+            allCommands.forEach((entry) => {
+              if (!entry.hide) {
                 let listEntry = {
                   id: promptId,
                   prompt: `${entry.command} - ${entry.description}`,
-                  source: 'system'
+                  source: 'system',
                 }
                 promptId += 1
                 listOfCommands.push(listEntry)
@@ -165,24 +166,24 @@ function App() {
             const instructionEntry = {
               id: promptId,
               prompt: myCommand.description,
-              source: 'system'
+              source: 'system',
             }
             promptsToAdd.push(instructionEntry)
             setAppState('await')
             setCurrentCommand(myCommand)
           })
-        } 
-      } else if(myCommand.type === 'multi') {
+        }
+      } else if (myCommand.type === 'multi') {
         let multiPrompts = myCommand.process(promptId)
         promptsToAdd.push(...multiPrompts)
         promptId += multiPrompts.length + 2
-      } 
-    } else if(appState === 'await') {
-      if(promptText === 'exit') {
+      }
+    } else if (appState === 'await') {
+      if (promptText === 'exit') {
         const exitPrompt = {
           id: promptId,
           prompt: 'Exiting...',
-          source: 'system'
+          source: 'system',
         }
         promptsToAdd.push(exitPrompt)
       } else {
@@ -190,14 +191,14 @@ function App() {
         const resultPrompt = {
           id: promptId,
           prompt: `Result: ${result}`,
-          source: 'system'
+          source: 'system',
         }
         promptsToAdd.push(resultPrompt)
       }
       setAppState('standard')
       setCurrentCommand(null)
     }
-    if(!isClear) {
+    if (!isClear) {
       setPromptList([...promptList, ...promptsToAdd])
     } else {
       setPromptList([])
@@ -207,11 +208,17 @@ function App() {
 
   function findCommand(command, currentId) {
     let foundCommand = {
-      process: () => {return { id: currentId, prompt: `Invalid Command. '${command}' does not exist.`, source: 'system'}},
-      type: 'simple'
+      process: () => {
+        return {
+          id: currentId,
+          prompt: `Invalid Command. '${command}' does not exist.`,
+          source: 'system',
+        }
+      },
+      type: 'simple',
     }
-    allCommands.forEach(entry => {
-      if(entry.command === command) {
+    allCommands.forEach((entry) => {
+      if (entry.command === command) {
         foundCommand = entry
       }
     })
@@ -219,18 +226,21 @@ function App() {
   }
 
   function handleKeyDown(e) {
-    if(promptList.length === 0 || appState === 'await') {
+    if (promptList.length === 0 || appState === 'await') {
       return
     }
-    const filteredPromptList = promptList.slice(0).filter(prompt => prompt.source === 'user').reverse()
-    if (e.code === "ArrowUp") { 
-      if(filteredPromptList.length < arrowSelect + 1) {
+    const filteredPromptList = promptList
+      .slice(0)
+      .filter((prompt) => prompt.source === 'user')
+      .reverse()
+    if (e.code === 'ArrowUp') {
+      if (filteredPromptList.length < arrowSelect + 1) {
         return
       }
       setArrowSelect(arrowSelect + 1)
       setPromptText(filteredPromptList[arrowSelect].prompt)
-    } else if(e.code === "ArrowDown") {
-      if(arrowSelect - 1 < 0) {
+    } else if (e.code === 'ArrowDown') {
+      if (arrowSelect - 1 < 0) {
         return
       }
       setPromptText(filteredPromptList[arrowSelect - 1].prompt)
@@ -243,28 +253,53 @@ function App() {
       <Computer>
         <ComputerMonitor backgroundColor={backgroundColor}>
           <Text textColor={textColor}>WELCOME TO CECIL.OS!</Text>
-          <Text textColor={textColor}>Use the "list" command to see what I can do!</Text>
+          <Text textColor={textColor}>
+            Use the &quot;list&quot; command to see what I can do!
+          </Text>
           <Text textColor={textColor}>Commands are not case-sensitive.</Text>
-          {
-            promptList.map(prompt =>
-              <Text key={prompt.id} textColor={textColor}>{prompt.source === 'user' ? userPreText : commandPreText}{prompt.prompt}</Text>
-            )
-          }
+          {promptList.map((prompt) => (
+            <Text key={prompt.id} textColor={textColor}>
+              {prompt.source === 'user' ? userPreText : commandPreText}
+              {prompt.prompt}
+            </Text>
+          ))}
           <PromptBox onSubmit={handlePromptSubmit}>
-            <PromptPreText htmlFor='prompt' textColor={textColor}>$<Prompt id='prompt' value={promptText} onChange={handlePromptText} autoFocus onKeyDown={handleKeyDown} backgroundColor={backgroundColor}/></PromptPreText>
-            <button type='submit' hidden/>
+            <PromptPreText htmlFor="prompt" textColor={textColor}>
+              $
+              <Prompt
+                id="prompt"
+                value={promptText}
+                onChange={handlePromptText}
+                autoFocus
+                onKeyDown={handleKeyDown}
+                backgroundColor={backgroundColor}
+              />
+            </PromptPreText>
+            <button type="submit" hidden />
           </PromptBox>
         </ComputerMonitor>
       </Computer>
       <ComputerBottom>
         Thomas Computer Systems v1.0
         <KnobRow>
-          <Knob label='Color' value={textColor} setValue={setTextColor} min={0} max={256}/>
-          <Knob label='Contrast' value={backgroundColor} setValue={setBackgroundColor} min={0} max={256}/>
+          <Knob
+            label="Color"
+            value={textColor}
+            setValue={setTextColor}
+            min={0}
+            max={256}
+          />
+          <Knob
+            label="Contrast"
+            value={backgroundColor}
+            setValue={setBackgroundColor}
+            min={0}
+            max={256}
+          />
         </KnobRow>
       </ComputerBottom>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
