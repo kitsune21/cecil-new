@@ -24,11 +24,11 @@ const KnobButton = styled.button`
 `
 
 interface KnobProps {
-  label: string;
-  value: number;
-  setValue: (value: number) => void;
-  min: number;
-  max: number;
+  label: string
+  value: number
+  setValue: (value: number) => void
+  min: number
+  max: number
 }
 
 const Knob = ({ label, value, setValue, min, max }: KnobProps) => {
