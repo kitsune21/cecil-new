@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { allCommands } from './commands/commandList'
 import styled from 'styled-components'
 import Knob from './components/Knob'
-import {Command, Prompt, ColorProps, TextColor} from './Types'
+import { BaseCommand, Prompt, ColorProps, TextColor } from './Types'
 
 const Computer = styled.div`
   padding: 20px;
@@ -75,7 +75,7 @@ function App() {
   const [promptText, setPromptText] = useState('')
   const [promptList, setPromptList] = useState<Prompt[]>([])
   const [appState, setAppState] = useState('standard')
-  const [currentCommand, setCurrentCommand] = useState<Command | null>(null)
+  const [currentCommand, setCurrentCommand] = useState<BaseCommand | null>(null)
   const [arrowSelect, setArrowSelect] = useState(0)
   const [textColor, setTextColor] = useState(204)
   const [backgroundColor, setBackgroundColor] = useState(0)
@@ -85,7 +85,7 @@ function App() {
   function handlePromptText(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value
     if (appState === 'await') {
-      if (!currentCommand) return
+      if (!currentCommand || !currentCommand.regex) return
       const checkCommandRegex = new RegExp(currentCommand.regex)
       const exitRegex = new RegExp(/^e?x?i?t?$/)
       if (checkCommandRegex.test(value)) {
@@ -118,7 +118,7 @@ function App() {
     promptId += 1
     const commandLower = promptText.toLocaleLowerCase().trim()
     if (appState === 'standard') {
-      const myCommand: Command = findCommand(commandLower, promptId)
+      const myCommand: BaseCommand = findCommand(commandLower, promptId)
       if (myCommand.type === 'simple') {
         const newPrompt = myCommand.process(promptId)
         promptsToAdd.push(newPrompt)
@@ -171,7 +171,7 @@ function App() {
         }
         promptsToAdd.push(exitPrompt)
       } else {
-        if(!currentCommand) return
+        if (!currentCommand?.awaitCommand) return
         const result = currentCommand.awaitCommand(promptText)
         const resultPrompt = {
           id: promptId,
@@ -192,7 +192,7 @@ function App() {
   }
 
   function findCommand(command: string, currentId: number) {
-    let foundCommand: Command = {
+    let foundCommand: BaseCommand = {
       command: 'invalid',
       process: () => {
         return {
@@ -205,7 +205,7 @@ function App() {
       regex: /1/,
       description: 'Only used here.',
       awaitCommand: () => null,
-      hide: null
+      hide: null,
     }
     allCommands.forEach((entry) => {
       if (entry.command === command) {
