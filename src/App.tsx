@@ -85,14 +85,17 @@ function App() {
   function handlePromptText(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value
     if (appState === 'await') {
-      if (!currentCommand || !currentCommand.regex) return
-      const checkCommandRegex = new RegExp(currentCommand.regex)
-      const exitRegex = new RegExp(/^e?x?i?t?$/)
-      if (checkCommandRegex.test(value)) {
-        setPromptText(value)
-      } else if (value === '') {
-        setPromptText(value)
-      } else if (exitRegex.test(value)) {
+      if (currentCommand && currentCommand.regex) {
+        const checkCommandRegex = new RegExp(currentCommand.regex)
+        const exitRegex = new RegExp(/^e?x?i?t?$/)
+        if (checkCommandRegex.test(value)) {
+          setPromptText(value)
+        } else if (value === '') {
+          setPromptText(value)
+        } else if (exitRegex.test(value)) {
+          setPromptText(value)
+        }
+      } else {
         setPromptText(value)
       }
     } else {
