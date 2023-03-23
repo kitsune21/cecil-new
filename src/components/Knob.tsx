@@ -23,7 +23,15 @@ const KnobButton = styled.button`
   background-color: beige;
 `
 
-const Knob = ({ label, value, setValue, min, max }) => {
+interface KnobProps {
+  label: string;
+  value: number;
+  setValue: (value: number) => void;
+  min: number;
+  max: number;
+}
+
+const Knob = ({ label, value, setValue, min, max }: KnobProps) => {
   function handleAddButton() {
     if (value < max) {
       setValue(value + 0.05 * max)

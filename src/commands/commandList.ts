@@ -1,10 +1,11 @@
 import { processAbout } from './about'
+import { Command } from '../Types'
 
 function downloadResume() {
   fetch('Resume.pdf').then((response) => {
     response.blob().then((blob) => {
       const fileURL = window.URL.createObjectURL(blob)
-      let alink = document.createElement('a')
+      const alink = document.createElement('a')
       alink.href = fileURL
       alink.download = 'Cecil-Thomas-Resume.pdf'
       alink.click()
@@ -12,7 +13,7 @@ function downloadResume() {
   })
 }
 
-function addAPromptObj(currentId, prompt) {
+function addAPromptObj(currentId: number, prompt: string) {
   return {
     id: currentId,
     prompt,
@@ -20,7 +21,7 @@ function addAPromptObj(currentId, prompt) {
   }
 }
 
-function lookUpNoteFrequency(checkNote) {
+function lookUpNoteFrequency(checkNote: string) {
   const notes = [
     [
       { note: 'c', frequency: 32.7 },
@@ -97,7 +98,7 @@ function lookUpNoteFrequency(checkNote) {
   ]
   let frequency = 0
   const noteSplit = checkNote.split('')
-  const noteOctave = noteSplit[1] ? noteSplit[1] - 1 : 3
+  const noteOctave = noteSplit[1] ? parseInt(noteSplit[1]) - 1 : 3
   notes[noteOctave].forEach((note) => {
     if (note.note === noteSplit[0].toLowerCase()) {
       frequency = note.frequency
@@ -106,16 +107,19 @@ function lookUpNoteFrequency(checkNote) {
   return frequency
 }
 
-export const allCommands = [
+export const allCommands: Command[] = [
   {
     command: 'about',
-    process: (currentId) => addAPromptObj(currentId, processAbout()),
+    process: (currentId: number) => addAPromptObj(currentId, processAbout()),
     description: 'Tells you a little about me.',
     type: 'simple',
+    regex: /a/,
+    awaitCommand: () => null,
+    hide: false,
   },
   {
     command: 'resume',
-    process: (currentId) => {
+    process: (currentId: number) => {
       return [
         addAPromptObj(currentId, '______Work Summary______'),
         addAPromptObj(
@@ -169,79 +173,94 @@ export const allCommands = [
     description:
       'Brief simple resume. Each section is not exhaustive. Just a basic idea.',
     type: 'multi',
+    regex: /a/,
+    awaitCommand: () => null,
+    hide: false,
   },
   {
     command: 'clear',
     description: 'Reset the terminal',
-    process: (upperProcess) => {
+    process: (upperProcess: () => void) => {
       upperProcess()
     },
     type: 'complex',
+    regex: /a/,
+    awaitCommand: () => null,
+    hide: false,
   },
   {
     command: 'list',
     description: 'List all the commands and their descriptions.',
-    process: (upperProcess) => {
+    process: (upperProcess: () => void) => {
       upperProcess()
     },
     type: 'complex',
+    regex: /a/,
+    awaitCommand: () => null,
+    hide: false,
   },
   {
     command: 'calculate',
     description:
       'Input a simple math expression such as: 1+2, 5-3, 7*8, etc. Type "exit" to quit out.',
-    process: (upperProcess) => {
+    process: (upperProcess: () => void) => {
       upperProcess()
     },
-    awaitCommand: (expression) => {
+    awaitCommand: (expression: string) => {
       const numbersList = expression.match(new RegExp(/[0-9]+/g))
       const operatorObj = expression.match(new RegExp(/[+\-*/]/))
-      const operator = operatorObj[0]
-      if (operator === '+') {
-        return parseFloat(numbersList[0]) + parseFloat(numbersList[1])
-      } else if (operator === '-') {
-        return parseFloat(numbersList[0]) - parseFloat(numbersList[1])
-      } else if (operator === '*') {
-        return parseFloat(numbersList[0]) * parseFloat(numbersList[1])
-      } else if (operator === '/') {
-        return parseFloat(numbersList[0]) / parseFloat(numbersList[1])
+      if(numbersList && operatorObj) {
+        const operator = operatorObj[0]
+        if (operator === '+') {
+          return parseFloat(numbersList[0]) + parseFloat(numbersList[1])
+        } else if (operator === '-') {
+          return parseFloat(numbersList[0]) - parseFloat(numbersList[1])
+        } else if (operator === '*') {
+          return parseFloat(numbersList[0]) * parseFloat(numbersList[1])
+        } else if (operator === '/') {
+          return parseFloat(numbersList[0]) / parseFloat(numbersList[1])
+        }
       }
+      return 'Invalid input.'
     },
     type: 'complex',
     regex: /[0-9]+|[+\-/][0-9]+/,
+    hide: false,
   },
   {
     command: 'calculate weather f',
     description:
       'Input the celsius value, and it will output the farenheight. Type "exit" to quit out.',
-    process: (upperProcess) => {
+    process: (upperProcess: () => void) => {
       upperProcess()
     },
     type: 'complex',
     regex: /^-?\d+(\.\d*)?$/,
-    awaitCommand: (value) => {
+    awaitCommand: (value: string) => {
       return (parseFloat(value) * 9) / 5 + 32
     },
+    hide: false,
   },
   {
     command: 'calculate weather c',
     description:
       'Input the farenheight value, and it will output the celsius. Type "exit" to quit out.',
-    process: (upperProcess) => {
+    process: (upperProcess: () => void) => {
       upperProcess()
     },
     type: 'complex',
     regex: /^-?\d+(\.\d*)?$/,
-    awaitCommand: (value) => {
+    awaitCommand: (value: string) => {
       return ((parseFloat(value) - 32) * 5) / 9
     },
+    hide: false
   },
   {
     command: 'movies',
     description:
       'A list of some of my favorite movies. Not in order. How can anyone actually rank them?',
     type: 'multi',
-    process: (currentId) => {
+    process: (currentId: number) => {
       return [
         addAPromptObj(currentId, '______Some Movies That I Like______'),
         addAPromptObj(
@@ -278,12 +297,15 @@ export const allCommands = [
         ),
       ]
     },
+    regex: /a/,
+    awaitCommand: () => null,
+    hide: false,
   },
   {
     command: 'games',
     description: 'A list of some of my favorite games.',
     type: 'multi',
-    process: (currentId) => {
+    process: (currentId: number) => {
       return [
         addAPromptObj(currentId, '______Some Games That I Like______'),
         addAPromptObj(
@@ -318,52 +340,68 @@ export const allCommands = [
           currentId + 8,
           "Final Fantasy IV - I don't think I'm allowed not to include this on my list of games since my name is Cecil. But aside from that, I really enjoy the game. Lots of fun characters.",
         ),
+        addAPromptObj(
+          currentId + 9,
+          "Some day I will make a game that goes here.",
+        ),
       ]
     },
+    regex: /a/,
+    awaitCommand: () => null,
+    hide: false,
   },
   {
     command: 'goto journeys',
     description: 'Will open a new tab to Journeys.Cafe',
     type: 'simple',
-    process: (currentId) => {
+    process: (currentId: number) => {
       window.open('https://journeys.cafe/')
       return addAPromptObj(currentId, 'Opening Journeys.Cafe...')
     },
     hide: true,
+    regex: /a/,
+    awaitCommand: () => null,
   },
   {
     command: 'goto frozenspade',
     description: 'Will open a new tab to FrozenSpade.TV.',
     type: 'simple',
-    process: (currentId) => {
+    process: (currentId: number) => {
       window.open('https://frozenspade.tv/')
       return addAPromptObj(currentId, 'Opening FrozenSpade.TV...')
     },
     hide: true,
+    regex: /a/,
+    awaitCommand: () => null,
   },
   {
     command: 'goto toolring',
     description: 'Will open a new tab to Toolring.Cecil-Thomas.com',
     type: 'simple',
-    process: (currentId) => {
+    process: (currentId: number) => {
       window.open('https://toolring.cecil-thomas.com')
       return addAPromptObj(currentId, 'Opening Toolring.Cecil-Thomas.com...')
     },
     hide: true,
+    regex: /a/,
+    awaitCommand: () => null,
   },
   {
     command: 'goto (journeys|frozenspade|toolring)',
     description:
       'Will open a new tab at the specified site. ie. goto journeys will send you to Journeys.Cafe',
     type: 'simple',
-    process: (currentId) =>
-      addAPromptObj(currentId, 'Please check your selection.'),
+    regex: /a/,
+    awaitCommand: () => null,
+    hide: false,
+    process: (currentId: number) =>
+      addAPromptObj(currentId, 'Please check your selection.')
   },
   {
     command: 'social',
     description: 'Shows you where to find me on Social Media.',
     type: 'multi',
-    process: (currentId) => {
+    process: (currentId: number) => {
       return [
         addAPromptObj(currentId, '______Social Media______'),
         addAPromptObj(currentId + 1, 'Twitter: @KiTsuNe76'),
@@ -373,12 +411,15 @@ export const allCommands = [
         addAPromptObj(currentId + 4, 'GitHub: kitsune21'),
       ]
     },
+    regex: /a/,
+    awaitCommand: () => null,
+    hide: false,
   },
   {
     command: 'books',
     description: 'Shows some books that I like.',
     type: 'multi',
-    process: (currentId) => {
+    process: (currentId: number) => {
       return [
         addAPromptObj(currentId, '______Books______'),
         addAPromptObj(
@@ -403,35 +444,41 @@ export const allCommands = [
         ),
       ]
     },
+    regex: /a/,
+    awaitCommand: () => null,
+    hide: false,
   },
   {
     command: 'download resume',
     description: 'Downloads the resume.',
     type: 'simple',
-    process: (currentId) => {
+    process: (currentId: number) => {
       downloadResume()
       return addAPromptObj(currentId, 'Downloading...')
     },
+    regex: /a/,
+    awaitCommand: () => null,
+    hide: false,
   },
   {
     command: 'write song',
     description:
       'Input notes c, d, e, f, g, a, b. Follow the note with an octave: 1-8. If no octave, it will default to the 4th. eg c1c2c3cc5c6c7c8',
     type: 'complex',
-    process: (upperProcess) => {
+    process: (upperProcess: () => void) => {
       upperProcess()
     },
-    awaitCommand: (notes) => {
-      let myRegexp = /[a-g][1-9]?/g
+    awaitCommand: (notes: string) => {
+      const myRegexp = /[a-g][1-9]?/g
       const notesMatched = [...notes.matchAll(myRegexp)]
-      const notesList = []
+      const notesList: string[] = []
       notesMatched.forEach((note) => {
         notesList.push(note[0])
       })
       const startDelay = 0
       const addDelay = 400
       let currentDelay = startDelay
-      const audioContextList = []
+      const audioContextList: AudioContext[] = []
       notesList.forEach((note) => {
         setTimeout(() => {
           const context = new AudioContext()
@@ -451,12 +498,14 @@ export const allCommands = [
       })
       return 'Playing...'
     },
+    hide: false,
+    regex: /a/,
   },
   {
     command: 'play a song',
     description: 'Will play a random song.',
     type: 'simple',
-    process: (currentId) => {
+    process: (currentId: number) => {
       const songs = [
         'bd5agabd5abd5a5g5d5c5ba',
         'ccegecddffb3ccegecddb3b3c',
@@ -467,11 +516,14 @@ export const allCommands = [
       ]
       const randomSong = Math.floor(Math.random() * songs.length)
       allCommands.forEach((command) => {
-        if (command.command === 'write song') {
+        if (command.command === 'write song' && command.awaitCommand) {
           command.awaitCommand(songs[randomSong])
         }
       })
       return addAPromptObj(currentId, 'Playing...')
     },
+    regex: /a/,
+    awaitCommand: () => null,
+    hide: false,
   },
 ]

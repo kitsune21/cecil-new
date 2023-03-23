@@ -6,10 +6,15 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
+    "@types/jest": "^29.5.0",
+    "@types/node": "^18.15.3",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "styled-components": "^5.3.6",
+    "typescript": "^5.0.2",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
@@ -18,7 +23,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "npx eslint --ignore-path .gitignore .",
-    "pretty": "npx prettier --ignore-path .gitignore --write \"**/*.(js|json|jsx)\""
+    "pretty": "npx prettier --ignore-path .gitignore --write \"**/*.(js|json|jsx|ts|tsx)\""
   },
   "browserslist": {
     "production": [
@@ -32,11 +37,14 @@
       "last 1 safari version"
     ]
   },
-  "main": "index.js",
+  "main": "index.tsx",
   "repository": "https://github.com/kitsune21/cecil-new.git",
   "author": "Cecil Thomas <11084542+kitsune21@users.noreply.github.com>",
   "license": "MIT",
   "devDependencies": {
+    "@types/styled-components": "^5.1.26",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
     "eslint": "^8.36.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-react": "^7.32.2",
