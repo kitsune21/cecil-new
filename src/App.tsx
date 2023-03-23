@@ -107,9 +107,9 @@ function App() {
 
   function processCommand() {
     let promptId: number = promptList.length + 1
-    const promptsToAdd = []
+    const promptsToAdd: Prompt[] = []
     let isClear = false
-    const userPrompt = {
+    const userPrompt: Prompt = {
       id: promptId,
       prompt: promptText,
       source: appState === 'await' ? 'response' : 'user',
