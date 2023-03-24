@@ -18,7 +18,7 @@ function lookUpNoteFrequency(checkNote: string) {
       frequency = note.frequency
     }
   })
-  return frequency * (Math.pow(2, noteOctave - 1))
+  return frequency * Math.pow(2, noteOctave - 1)
 }
 
 export const writeSongCommand = {
@@ -60,7 +60,7 @@ export const writeSongCommand = {
     return 'Playing...'
   },
   hide: false,
-  regex: null
+  regex: null,
 }
 
 export const playSongCommand = {
@@ -82,5 +82,5 @@ export const playSongCommand = {
   },
   awaitCommand: () => null,
   hide: false,
-  regex: null
+  regex: null,
 }

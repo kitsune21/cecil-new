@@ -115,7 +115,9 @@ function App() {
     const userPrompt: Prompt = {
       id: promptId,
       prompt: promptText,
-      source: appState === 'await' ? 'response' : 'user',
+      source: 'user',
+      timestamp: new Date(),
+      hideTimestamp: false,
     }
     promptsToAdd.push(userPrompt)
     promptId += 1
@@ -141,6 +143,8 @@ function App() {
                   id: promptId,
                   prompt: `${entry.command} - ${entry.description}`,
                   source: 'system',
+                  timestamp: new Date(),
+                  hideTimestamp: true,
                 }
                 promptId += 1
                 listOfCommands.push(listEntry)
@@ -150,10 +154,12 @@ function App() {
           })
         } else {
           myCommand.process(() => {
-            const instructionEntry = {
+            const instructionEntry: Prompt = {
               id: promptId,
               prompt: myCommand.description,
               source: 'system',
+              timestamp: new Date(),
+              hideTimestamp: false,
             }
             promptsToAdd.push(instructionEntry)
             setAppState('await')
@@ -167,19 +173,23 @@ function App() {
       }
     } else if (appState === 'await') {
       if (promptText === 'exit') {
-        const exitPrompt = {
+        const exitPrompt: Prompt = {
           id: promptId,
           prompt: 'Exiting...',
           source: 'system',
+          timestamp: new Date(),
+          hideTimestamp: false,
         }
         promptsToAdd.push(exitPrompt)
       } else {
         if (!currentCommand?.awaitCommand) return
         const result = currentCommand.awaitCommand(promptText)
-        const resultPrompt = {
+        const resultPrompt: Prompt = {
           id: promptId,
           prompt: `Result: ${result}`,
           source: 'system',
+          timestamp: new Date(),
+          hideTimestamp: false,
         }
         promptsToAdd.push(resultPrompt)
       }
@@ -241,6 +251,13 @@ function App() {
     }
   }
 
+  function displayTimeStamp(timestamp: Date): string {
+    const intlTime = new Intl.DateTimeFormat(undefined, {
+      timeStyle: 'short',
+    }).format(timestamp)
+    return intlTime
+  }
+
   return (
     <div>
       <Computer>
@@ -252,7 +269,18 @@ function App() {
           <Text textColor={textColor}>Commands are not case-sensitive.</Text>
           {promptList.map((prompt: Prompt) => (
             <Text key={prompt.id} textColor={textColor}>
-              {prompt.source === 'user' ? userPreText : commandPreText}
+              {prompt.source !== 'user' ? (
+                <>
+                  <span>{commandPreText}</span>
+                  {
+                    !prompt.hideTimestamp ?
+                    <span> {displayTimeStamp(prompt.timestamp)} </span> 
+                    :null
+                  }
+                </>
+              ) : (
+                userPreText
+              )}
               {prompt.prompt}
             </Text>
           ))}
