@@ -2,6 +2,8 @@ export type Prompt = {
   id: number
   prompt: string
   source: string
+  timestamp: Date
+  hideTimestamp: boolean
 }
 
 export type BaseCommand = {

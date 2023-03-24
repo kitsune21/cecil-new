@@ -1,4 +1,4 @@
-import { BaseCommand } from '../Types'
+import { BaseCommand, Prompt } from '../Types'
 import { aboutCommand } from './commandObjects/about'
 import { downloadResumeCommand, resumeCommand } from './commandObjects/resume'
 import { clearCommand } from './commandObjects/clear'
@@ -22,11 +22,13 @@ import {
 } from './commandObjects/goto'
 import { playSongCommand, writeSongCommand } from './commandObjects/songs'
 
-export function addAPromptObj(currentId: number, prompt: string) {
+export function addAPromptObj(currentId: number, prompt: string, hideTimestamp = false): Prompt {
   return {
     id: currentId,
     prompt,
     source: 'system',
+    timestamp: new Date(),
+    hideTimestamp: hideTimestamp,
   }
 }
 
