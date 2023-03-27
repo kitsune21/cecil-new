@@ -8,6 +8,7 @@ import {
   listCommand,
   moviesCommand,
   socialsCommand,
+  techStackCommand,
 } from './commandObjects/list'
 import {
   calculateCommand,
@@ -22,7 +23,11 @@ import {
 } from './commandObjects/goto'
 import { playSongCommand, writeSongCommand } from './commandObjects/songs'
 
-export function addAPromptObj(currentId: number, prompt: string, hideTimestamp = false): Prompt {
+export function addAPromptObj(
+  currentId: number,
+  prompt: string,
+  hideTimestamp = false,
+): Prompt {
   return {
     id: currentId,
     prompt,
@@ -33,18 +38,19 @@ export function addAPromptObj(currentId: number, prompt: string, hideTimestamp =
 }
 
 export const allCommands: BaseCommand[] = [
+  clearCommand,
+  listCommand,
   aboutCommand,
   resumeCommand,
   downloadResumeCommand,
-  clearCommand,
-  listCommand,
-  calculateCommand,
-  calculateCCommand,
-  calculateFCommand,
+  techStackCommand,
   moviesCommand,
   gamesCommand,
   socialsCommand,
   booksCommand,
+  calculateCommand,
+  calculateCCommand,
+  calculateFCommand,
   gotoBasicCommand,
   gotoJourneysCommand,
   gotoFrozenspadeCommand,

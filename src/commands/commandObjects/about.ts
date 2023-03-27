@@ -1,18 +1,15 @@
 import { addAPromptObj } from '../commandList'
 import { SimpleCommand } from '../../Types'
 
-function processAbout() {
-  const aboutText =
-    'My name is Cecil. I am a software developer. I love building things and expressing my creativity in anyway that I can.\n' +
-    'I like to watch movies, ride my bike, play with my pets, and learn languages!\n' +
-    'よろしくお願いします！\n' +
-    'Mucho Gusto!\n'
-  return aboutText
-}
+const aboutText =
+  'My name is Cecil. I am a software developer. I love building things and expressing my creativity in anyway that I can.' +
+  'I like to watch movies, ride my bike, play with my pets, and learn languages!' +
+  'よろしくお願いします！' +
+  'Mucho Gusto!'
 
 export const aboutCommand: SimpleCommand = {
   command: 'about',
-  process: (currentId: number) => addAPromptObj(currentId, processAbout()),
+  process: (currentId: number) => addAPromptObj(currentId, aboutText),
   description: 'Tells you a little about me.',
   type: 'simple',
   regex: null,
