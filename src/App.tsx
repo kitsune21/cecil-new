@@ -1,75 +1,17 @@
 import React, { useState } from 'react'
-import { allCommands } from './commands/commandList'
-import styled from 'styled-components'
 import Knob from './components/Knob'
-import { BaseCommand, Prompt, ColorProps, TextColor } from './Types'
-
-const Computer = styled.div`
-  padding: 20px;
-  border: 2px solid black;
-  border-bottom: none;
-  border-radius: 12px 12px 0 0;
-  background-color: beige;
-  height: 85vh;
-  margin: 10px 10px 0 10px;
-`
-
-const ComputerMonitor = styled.div`
-  height: 100%;
-  background-color: ${(props: ColorProps) =>
-    `rgb(${props.backgroundColor}, ${props.backgroundColor}, ${props.backgroundColor})`};
-  overflow-y: auto;
-  border: 1px solid black;
-  border-radius: 8px;
-`
-
-const ComputerBottom = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: beige;
-  height: 50px;
-  border-bottom: 2px solid black;
-  border-right: 2px solid black;
-  border-left: 2px solid black;
-  border-radius: 0 0 12px 12px;
-  margin: 0 10px 0 10px;
-  font-family: EBGaramond;
-`
-
-const KnobRow = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  width: 90%;
-`
-
-const Text = styled.p`
-  color: rgb(0, ${(props: TextColor) => props.textColor}, 0);
-  margin: 0;
-  padding-left: 10px;
-  padding-top: 5px;
-  font-family: Roboto Condensed;
-`
-
-const PromptBox = styled.form`
-  margin-top: 5px;
-  margin-bottom: 10px;
-  width: 100%;
-`
-
-const PromptInput = styled.input`
-  border: none;
-  background-color: ${(props: ColorProps) =>
-    `rgb(${props.backgroundColor}, ${props.backgroundColor}, ${props.backgroundColor})`};
-  color: white;
-  margin-left: 5px;
-`
-
-const PromptPreText = styled.label`
-  color: rgb(0, ${(props: TextColor) => props.textColor}, 0);
-  margin-left: 10px;
-`
+import { BaseCommand, Prompt } from './Types'
+import { processCommand } from './commands/processCommand'
+import {
+  Computer,
+  ComputerBottom,
+  ComputerMonitor,
+  Text,
+  PromptBox,
+  PromptInput,
+  PromptPreText,
+  KnobRow,
+} from './components/styledComponents'
 
 function App() {
   const [promptText, setPromptText] = useState('')
@@ -105,127 +47,17 @@ function App() {
 
   function handlePromptSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    processCommand()
-  }
-
-  function processCommand() {
-    let promptId: number = promptList.length + 1
-    const promptsToAdd: Prompt[] = []
-    let isClear = false
-    const userPrompt: Prompt = {
-      id: promptId,
-      prompt: promptText,
-      source: 'user',
-      timestamp: new Date(),
-      hideTimestamp: false,
-    }
-    promptsToAdd.push(userPrompt)
-    promptId += 1
-    const commandLower = promptText.toLocaleLowerCase().trim()
-    if (appState === 'standard') {
-      const myCommand: BaseCommand = findCommand(commandLower, promptId)
-      if (myCommand.type === 'simple') {
-        const newPrompt = myCommand.process(promptId)
-        promptsToAdd.push(newPrompt)
-      } else if (myCommand.type === 'complex') {
-        if (myCommand.command === 'clear') {
-          myCommand.process(() => {
-            setAppState('standard')
-            setArrowSelect(0)
-            isClear = true
-          })
-        } else if (myCommand.command === 'list') {
-          myCommand.process(() => {
-            const listOfCommands: Prompt[] = []
-            allCommands.forEach((entry) => {
-              if (!entry.hide) {
-                const listEntry: Prompt = {
-                  id: promptId,
-                  prompt: `${entry.command} - ${entry.description}`,
-                  source: 'system',
-                  timestamp: new Date(),
-                  hideTimestamp: true,
-                }
-                promptId += 1
-                listOfCommands.push(listEntry)
-              }
-            })
-            promptsToAdd.push(...listOfCommands)
-          })
-        } else {
-          myCommand.process(() => {
-            const instructionEntry: Prompt = {
-              id: promptId,
-              prompt: myCommand.description,
-              source: 'system',
-              timestamp: new Date(),
-              hideTimestamp: false,
-            }
-            promptsToAdd.push(instructionEntry)
-            setAppState('await')
-            setCurrentCommand(myCommand)
-          })
-        }
-      } else if (myCommand.type === 'multi') {
-        const multiPrompts = myCommand.process(promptId)
-        promptsToAdd.push(...multiPrompts)
-        promptId += multiPrompts.length + 2
-      }
-    } else if (appState === 'await') {
-      if (promptText === 'exit') {
-        const exitPrompt: Prompt = {
-          id: promptId,
-          prompt: 'Exiting...',
-          source: 'system',
-          timestamp: new Date(),
-          hideTimestamp: false,
-        }
-        promptsToAdd.push(exitPrompt)
-      } else {
-        if (!currentCommand?.awaitCommand) return
-        const result = currentCommand.awaitCommand(promptText)
-        const resultPrompt: Prompt = {
-          id: promptId,
-          prompt: `Result: ${result}`,
-          source: 'system',
-          timestamp: new Date(),
-          hideTimestamp: false,
-        }
-        promptsToAdd.push(resultPrompt)
-      }
-      setAppState('standard')
-      setCurrentCommand(null)
-    }
-    if (!isClear) {
-      setPromptList([...promptList, ...promptsToAdd])
-    } else {
-      setPromptList([])
-    }
-    setPromptText('')
-  }
-
-  function findCommand(command: string, currentId: number) {
-    let foundCommand: BaseCommand = {
-      command: 'invalid',
-      process: () => {
-        return {
-          id: currentId,
-          prompt: `Invalid Command. '${command}' does not exist.`,
-          source: 'system',
-        }
-      },
-      type: 'simple',
-      regex: /1/,
-      description: 'Only used here.',
-      awaitCommand: () => null,
-      hide: null,
-    }
-    allCommands.forEach((entry) => {
-      if (entry.command === command) {
-        foundCommand = entry
-      }
-    })
-    return foundCommand
+    processCommand(
+      promptList,
+      promptText,
+      appState,
+      currentCommand,
+      setAppState,
+      setArrowSelect,
+      setCurrentCommand,
+      setPromptList,
+      setPromptText,
+    )
   }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -272,11 +104,9 @@ function App() {
               {prompt.source !== 'user' ? (
                 <>
                   <span>{commandPreText}</span>
-                  {
-                    !prompt.hideTimestamp ?
-                    <span> {displayTimeStamp(prompt.timestamp)} </span> 
-                    :null
-                  }
+                  {!prompt.hideTimestamp ? (
+                    <span> {displayTimeStamp(prompt.timestamp)} </span>
+                  ) : null}
                 </>
               ) : (
                 userPreText
