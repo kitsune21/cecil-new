@@ -9,6 +9,8 @@ import {
   moviesCommand,
   socialsCommand,
   techStackCommand,
+  foodCommand,
+  hobbyCommand,
 } from './commandObjects/list'
 import {
   calculateCommand,
@@ -43,6 +45,8 @@ export const allCommands: BaseCommand[] = [
   aboutCommand,
   resumeCommand,
   downloadResumeCommand,
+  foodCommand,
+  hobbyCommand,
   techStackCommand,
   moviesCommand,
   gamesCommand,

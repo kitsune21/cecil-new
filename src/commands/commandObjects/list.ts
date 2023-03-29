@@ -228,3 +228,96 @@ export const techStackCommand: BaseCommand = {
   awaitCommand: () => null,
   hide: false,
 }
+
+export const foodCommand: BaseCommand = {
+  command: 'food',
+  description: 'Lists all of my favorite foods.',
+  type: 'multi',
+  process: (currentId: number) => {
+    return [
+      addAPromptObj(currentId, '______Food That I Like______'),
+      addAPromptObj(
+        currentId + 1,
+        "Tonkotsu Ramen - I am a huge ramen snob. I was super lucky and got to spend two years in Japan eating some of the best ramen around, so far I haven't found a place quite on the same level in the US.",
+        true,
+      ),
+      addAPromptObj(
+        currentId + 2,
+        "Pizza - New York style, Chicago style, Pizza Hut, Little Caesar's, I like most pizzas. And it's one of the few things that I'm pretty good at making myself. I just enjoy a good 'za!",
+        true,
+      ),
+      addAPromptObj(
+        currentId + 3,
+        "Cheesecake - I looooooove no-bake cheesecakes. My mom makes the best cheese cakes. It's what I get every year on my birthday. New York style ins't bad too.",
+        true,
+      ),
+      addAPromptObj(
+        currentId + 4,
+        "Tacos - My family makes some killer tacos. We've grown our own corn, harvested it, ground it down, and made fresh tacos with it. Of all colors. Yellow, white, blue, red, orange, pink. Just about done it all.",
+        true,
+      ),
+      addAPromptObj(
+        currentId + 5,
+        'Butter Chicken Curry - Funnily enough I first tried Indian food while living in Japan. One place in Japan I was going there so frequently they started to give me free naan and lassi.',
+        true,
+      ),
+      addAPromptObj(
+        currentId + 6,
+        "Chicken Wings - I love buffalo sauce and a good chicken wing. I prefer flats, but they are all good. I don't discriminate against boneless wings. Sometimes I just don't feel like getting my fingers dirty!",
+        true,
+      ),
+      addAPromptObj(
+        currentId + 7,
+        'Japanese Curry w/ Tonkatsu - Curry is such a great comfort food. Especially with the tonkatsu. Nice and warm, a little spicy, and very filling. I would love to open a curry restaurant.',
+        true,
+      ),
+    ]
+  },
+  regex: /a/,
+  awaitCommand: () => null,
+  hide: false,
+}
+
+export const hobbyCommand: BaseCommand = {
+  command: 'hobbies',
+  description: 'List of my current hobbies.',
+  type: 'multi',
+  process: (currentId: number) => {
+    return [
+      addAPromptObj(currentId, '______Hobbies That I Enjoy______'),
+      addAPromptObj(
+        currentId + 1,
+        "Watching Movies - I watch a lot of movies. It's one of the things that my wife and I do together a lot. Ever year we have a two day Start Wars movie marathon where we watch all the movies (1-9, Solo, Rogue 1) back to back to back.",
+        true,
+      ),
+      addAPromptObj(
+        currentId + 2,
+        "Playing D&D - I'm pretty new to the whole D&D thing, but I enjoy the world creation aspect. I'm a player in one campaign, and a DM in another currently.",
+        true,
+      ),
+      addAPromptObj(
+        currentId + 3,
+        'Programming - A big chunk of my time right now goes to programming. Either working on this website, working on my big project (Journeys.Cafe), or playing around with little things. I really enjoy building things.',
+        true,
+      ),
+      addAPromptObj(
+        currentId + 4,
+        "Studying Spanish - I've always wanted to be able to speak multiple languages, and knowing so many people that already speak it, it seemed like the logical choice for a third language (I also speak Japanese).",
+        true,
+      ),
+      addAPromptObj(
+        currentId + 5,
+        "Traveling - I love being able to get out and see new places. I've been incredibly lucky to travel so much already, but a big reason I built Journeys.Cafe is to be able to plan better trips, and help people do the same.",
+        true,
+      ),
+      addAPromptObj(
+        currentId + 6,
+        "Reading - I read a lot of really boring books lol. I read a lot of history books, biographies, economics, and a lot of other non-fiction. As a kid I read a lot more fiction, but now I'm enjoying all the boring stuff!",
+        true,
+      ),
+    ]
+  },
+  regex: /a/,
+  awaitCommand: () => null,
+  hide: false,
+}
