@@ -5,7 +5,7 @@ const aboutText =
   'My name is Cecil. I am a software developer in the Salt Lake City area. ' +
   'I love building things and expressing my creativity in anyway that I can. ' +
   'I like to keep busy by learning and experiencing as many things as possible. ' +
-  "Whether that is new computer science concepts, zoology, languages, it really doesn't matter. I want to learn it all! " +
+  "Whether that is new computer science concepts, science, history (especially history), languages, it really doesn't matter. I want to learn it all! " +
   'I look forward to meeting and working with you! ' +
   'よろしくお願いします！ ' +
   'Mucho Gusto! '
