@@ -91,7 +91,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div data-testid="app">
       <Computer>
         <ComputerMonitor backgroundColor={backgroundColor}>
           <Text textColor={textColor}>WELCOME TO CECIL.OS!</Text>
