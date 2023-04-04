@@ -94,10 +94,10 @@ function App() {
   return (
     <div data-testid="app">
       <Computer>
-        <ComputerMonitor backgroundColor={backgroundColor}>
+        <ComputerMonitor id='monitor' backgroundColor={backgroundColor}>
           <WelcomeText textColor={textColor}/>
           {promptList.map((prompt: Prompt) => (
-            <Text key={prompt.id} textColor={textColor}>
+            <Text key={prompt.id} textColor={textColor} id={prompt.id.toString()}>
               {prompt.source !== 'user' ? (
                 <>
                   <span>{commandPreText}</span>
