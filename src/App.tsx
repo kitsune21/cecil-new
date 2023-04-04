@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Knob from './components/Knob'
+import WelcomeText from './components/WelcomeText'
 import { BaseCommand, Prompt } from './Types'
 import { processCommand } from './commands/processCommand'
 import {
@@ -94,11 +95,7 @@ function App() {
     <div data-testid="app">
       <Computer>
         <ComputerMonitor backgroundColor={backgroundColor}>
-          <Text textColor={textColor}>WELCOME TO CECIL.OS!</Text>
-          <Text textColor={textColor}>
-            Use the &quot;list&quot; command to see what I can do!
-          </Text>
-          <Text textColor={textColor}>Commands are not case-sensitive.</Text>
+          <WelcomeText textColor={textColor}/>
           {promptList.map((prompt: Prompt) => (
             <Text key={prompt.id} textColor={textColor}>
               {prompt.source !== 'user' ? (
