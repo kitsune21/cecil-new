@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Knob from './components/Knob'
 import WelcomeText from './components/WelcomeText'
+import BootUpText from './components/BootUpText'
 import { BaseCommand, Prompt } from './Types'
 import { processCommand } from './commands/processCommand'
 import {
@@ -22,8 +23,16 @@ function App() {
   const [arrowSelect, setArrowSelect] = useState(0)
   const [textColor, setTextColor] = useState(204)
   const [backgroundColor, setBackgroundColor] = useState(0)
+  const [isBootUp, setIsBootUp] = useState(false)
   const commandPreText = '--  '
   const userPreText = '@ '
+  const bootTime = 5000
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsBootUp(true)
+    }, bootTime)
+  })
 
   function handlePromptText(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value
@@ -94,10 +103,18 @@ function App() {
   return (
     <div data-testid="app">
       <Computer>
-        <ComputerMonitor id='monitor' backgroundColor={backgroundColor}>
-          <WelcomeText textColor={textColor}/>
+        <ComputerMonitor id="monitor" backgroundColor={backgroundColor}>
+          {!isBootUp ? (
+            <BootUpText textColor={textColor} bootTime={bootTime} />
+          ) : (
+            <WelcomeText textColor={textColor} />
+          )}
           {promptList.map((prompt: Prompt) => (
-            <Text key={prompt.id} textColor={textColor} id={prompt.id.toString()}>
+            <Text
+              key={prompt.id}
+              textColor={textColor}
+              id={prompt.id.toString()}
+            >
               {prompt.source !== 'user' ? (
                 <>
                   <span>{commandPreText}</span>
@@ -111,20 +128,22 @@ function App() {
               {prompt.prompt}
             </Text>
           ))}
-          <PromptBox onSubmit={handlePromptSubmit}>
-            <PromptPreText htmlFor="prompt" textColor={textColor}>
-              $
-              <PromptInput
-                id="prompt"
-                value={promptText}
-                onChange={handlePromptText}
-                autoFocus
-                onKeyDown={handleKeyDown}
-                backgroundColor={backgroundColor}
-              />
-            </PromptPreText>
-            <button type="submit" hidden />
-          </PromptBox>
+          {isBootUp ? (
+            <PromptBox onSubmit={handlePromptSubmit}>
+              <PromptPreText htmlFor="prompt" textColor={textColor}>
+                $
+                <PromptInput
+                  id="prompt"
+                  value={promptText}
+                  onChange={handlePromptText}
+                  autoFocus
+                  onKeyDown={handleKeyDown}
+                  backgroundColor={backgroundColor}
+                />
+              </PromptPreText>
+              <button type="submit" hidden />
+            </PromptBox>
+          ) : null}
         </ComputerMonitor>
       </Computer>
       <ComputerBottom>

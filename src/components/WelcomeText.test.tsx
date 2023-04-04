@@ -4,9 +4,7 @@ import WelcomeText from './WelcomeText'
 
 describe('Welcome Text component', () => {
   it('renders without errors', () => {
-    render(
-      <WelcomeText textColor={204}/>,
-    )
+    render(<WelcomeText textColor={204} />)
     const titleElement = screen.getByText(/CECIL/i)
     expect(titleElement).toBeInTheDocument()
   })
