@@ -106,6 +106,12 @@ export function processCommand(
     setPromptList([])
   }
   setPromptText('')
+  const monitor = document.getElementById('monitor')
+  if (monitor) {
+    setTimeout(() => {
+      monitor.scrollTo(0, monitor.scrollHeight)
+    }, 5)
+  }
 }
 
 function findCommand(command: string, currentId: number) {
