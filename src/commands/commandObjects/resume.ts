@@ -6,7 +6,7 @@ interface ResumeCommand extends BaseCommand {
 }
 
 function downloadResume() {
-  fetch('Resume.pdf').then((response) => {
+  fetch('Cecil-Thomas-Resume.pdf').then((response) => {
     response.blob().then((blob) => {
       const fileURL = window.URL.createObjectURL(blob)
       const alink = document.createElement('a')
