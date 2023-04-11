@@ -8,4 +8,11 @@ describe('Welcome Text component', () => {
     const titleElement = screen.getByText(/CECIL/i)
     expect(titleElement).toBeInTheDocument()
   })
+
+  it('does not error when unmounted', () => {
+    const { unmount } = render(<WelcomeText textColor={204} />)
+    expect(() => {
+      unmount()
+    }).not.toThrow()
+  })
 })

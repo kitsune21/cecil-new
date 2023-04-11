@@ -5,7 +5,7 @@ interface ResumeCommand extends BaseCommand {
   process: (promptId: number) => Prompt[]
 }
 
-function downloadResume() {
+export function downloadResume() {
   fetch('Cecil-Thomas-Resume.pdf').then((response) => {
     response.blob().then((blob) => {
       const fileURL = window.URL.createObjectURL(blob)

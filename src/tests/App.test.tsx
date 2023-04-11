@@ -8,4 +8,11 @@ describe('App component', () => {
     const appElement = screen.getByTestId('app')
     expect(appElement).toBeInTheDocument()
   })
+
+  it('does not error when unmounted', () => {
+    const { unmount } = render(<App />)
+    expect(() => {
+      unmount()
+    }).not.toThrow()
+  })
 })

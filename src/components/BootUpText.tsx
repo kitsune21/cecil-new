@@ -42,7 +42,15 @@ const BootUpText = ({ textColor, bootTime }: BootUpProps) => {
     <div data-testid="bootup">
       {bootUpTextList.map((text) => (
         <React.Fragment key={text.id}>
-          {text.active ? <Text textColor={textColor}>{text.text} <Loading time={(bootTime / (bootUpTextList.length + 1))} id={text.id}/></Text> : null}
+          {text.active ? (
+            <Text data-testid={`bootup-${text.id}`} textColor={textColor}>
+              {text.text}{' '}
+              <Loading
+                time={bootTime / (bootUpTextList.length + 1)}
+                id={text.id}
+              />
+            </Text>
+          ) : null}
         </React.Fragment>
       ))}
     </div>
