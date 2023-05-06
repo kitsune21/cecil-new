@@ -14,7 +14,7 @@ test('downloadResume should download resume file', async () => {
     download: '',
     click: jest.fn(),
   }))
-  global.document.createElement = createElementMock
+  //global.document.createElement = createElementMock
 
   // call the function
   await downloadResume()
