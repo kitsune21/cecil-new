@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { ColorProps, TextColor } from '../Types'
+import { ColorProps, TextColor, InputColorProps } from '../Types'
 
 export const Computer = styled.div`
   padding: 20px;
@@ -57,9 +57,9 @@ export const PromptBox = styled.form`
 
 export const PromptInput = styled.input`
   border: none;
-  background-color: ${(props: ColorProps) =>
+  background-color: ${(props: InputColorProps) =>
     `rgb(${props.backgroundColor}, ${props.backgroundColor}, ${props.backgroundColor})`};
-  color: white;
+  color: rgb(0, ${(props: InputColorProps) => props.textColor}, 0);
   margin-left: 5px;
 `
 
