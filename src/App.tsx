@@ -139,6 +139,7 @@ function App() {
                   autoFocus
                   onKeyDown={handleKeyDown}
                   backgroundColor={backgroundColor}
+                  textColor={textColor}
                 />
               </PromptPreText>
               <button type="submit" hidden />

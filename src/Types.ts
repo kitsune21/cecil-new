@@ -36,3 +36,8 @@ export type ColorProps = {
 export type TextColor = {
   textColor: number
 }
+
+export type InputColorProps = {
+  backgroundColor: number
+  textColor: number
+}
