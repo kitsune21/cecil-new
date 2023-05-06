@@ -24,17 +24,17 @@ export const resumeCommand: ResumeCommand = {
       addAPromptObj(currentId, '______Work Summary______'),
       addAPromptObj(
         currentId + 1,
-        'Entrata - Software Engineer I (2022-Current): but doesnt do anything yet.',
+        'Entrata - Software Engineer I (2022-Current): Develop new features, troubleshoot and resolve bugs. PHP, React, Typescript.',
         true,
       ),
       addAPromptObj(
         currentId + 2,
-        'Entrata - Software Development Manager (2020-2022): but doesnt do anything yet.',
+        'Entrata - Software Development Manager (2020-2022): Scrum Manager for two different product teams out of India.',
         true,
       ),
       addAPromptObj(
         currentId + 3,
-        'Entrata - Customer Resolution Specialist (2018-2020): but doesnt do anything yet.',
+        'Entrata - Customer Resolution Specialist (2018-2020): Handle inbound calls, emails, and chats from clients and provide support in resolving any issues.',
         true,
       ),
       addAPromptObj(currentId + 4, '______Project Summary______', true),
