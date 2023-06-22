@@ -1,6 +1,16 @@
 import { BaseCommand, Prompt } from '../Types'
-import { aboutCommand } from './commandObjects/about'
-import { downloadResumeCommand, resumeCommand } from './commandObjects/resume'
+import {
+  aboutCommand,
+  salesPitchCommand,
+  whyHireCommand,
+} from './commandObjects/about'
+import {
+  downloadResumeCommand,
+  resumeCommand,
+  resumeWorkCommand,
+  resumeProjectCommand,
+  resumeSkillsCommand,
+} from './commandObjects/resume'
 import { clearCommand } from './commandObjects/clear'
 import {
   booksCommand,
@@ -45,7 +55,12 @@ export const allCommands: BaseCommand[] = [
   clearCommand,
   listCommand,
   aboutCommand,
+  whyHireCommand,
+  salesPitchCommand,
   resumeCommand,
+  resumeWorkCommand,
+  resumeProjectCommand,
+  resumeSkillsCommand,
   downloadResumeCommand,
   foodCommand,
   hobbyCommand,

@@ -19,3 +19,33 @@ export const aboutCommand: SimpleCommand = {
   hide: null,
   awaitCommand: null,
 }
+
+const whyHireText = `I'm scrappy. I like to get into the weeds of whatever it is I'm building and working on. I am always learning and trying out new things.
+  I know how to take failure and learn from it. I like to build things that I will actually use. (Run the command "sales pitch" to see a great example!)
+`
+
+export const whyHireCommand: SimpleCommand = {
+  command: 'why hire me',
+  process: (currentId: number) => addAPromptObj(currentId, whyHireText),
+  description: 'Shows you why you need to hire me.',
+  type: 'simple',
+  regex: null,
+  hide: null,
+  awaitCommand: null,
+}
+
+const salesPitchText = `Journeys.Cafe is your one stop shop for creating sharable itineraries for any type of vacation you will be going on!
+  New features are constantly being released! 
+  I am building this from the ground up, so please feel free to submit feedback and ideas for things that you need to make your Journey even better!
+`
+
+export const salesPitchCommand: SimpleCommand = {
+  command: 'sales pitch',
+  process: (currentId: number) =>
+    addAPromptObj(currentId, salesPitchText, false, 'https://journeys.cafe/'),
+  description: 'Shows you why you need to hire me.',
+  type: 'simple',
+  regex: null,
+  hide: null,
+  awaitCommand: null,
+}
