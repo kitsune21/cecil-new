@@ -42,26 +42,31 @@ export const resumeCommand: ResumeCommand = {
         currentId + 5,
         'Journeys.Cafe - Website built using React, NodeJs (on lambda functions), and a postgres db.',
         true,
+        'https://journeys.cafe/',
       ),
       addAPromptObj(
         currentId + 6,
         'Frozenspade.TV - Website built using React. Hosted on Netlify, utilizes CI/CD.',
         true,
+        'https://frozenspade.tv',
       ),
       addAPromptObj(
         currentId + 7,
         'Toolring.Cecil-Thomas.com - Fun little site for people playing Animal Crossing New Horizons. Gives a filterable table of things you can catch in the game.',
         true,
+        'https://toolring.cecil-thomas.com',
       ),
       addAPromptObj(
         currentId + 8,
         'Benazio Royale - Game submission for the 2022 GMTK Game Jam. Built using Unity (C#)',
         true,
+        'https://kitsune-23.itch.io/benazio-royale',
       ),
       addAPromptObj(
         currentId + 9,
         'Samba Island - Small game built for fun using Unity (C#).',
         true,
+        'https://kitsune-23.itch.io/samba-island',
       ),
       addAPromptObj(currentId + 10, '______Skills Summary______', true),
       addAPromptObj(

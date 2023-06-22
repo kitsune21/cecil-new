@@ -67,3 +67,7 @@ export const PromptPreText = styled.label`
   color: rgb(0, ${(props: TextColor) => props.textColor}, 0);
   margin-left: 10px;
 `
+
+export const PromptLink = styled.a`
+  color: rgb(0, 0, ${(props: TextColor) => props.textColor});
+`

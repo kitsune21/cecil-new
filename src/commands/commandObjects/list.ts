@@ -139,11 +139,31 @@ export const socialsCommand: BaseCommand = {
   process: (currentId: number) => {
     return [
       addAPromptObj(currentId, '______Social Media______'),
-      addAPromptObj(currentId + 1, 'Twitter: @KiTsuNe76', true),
-      addAPromptObj(currentId + 4, 'LinkedIn: cecilthomas23', true),
-      addAPromptObj(currentId + 2, 'Instagram: journeys.cafe', true),
+      addAPromptObj(
+        currentId + 1,
+        'Twitter: @KiTsuNe76',
+        true,
+        'https://twitter.com/KiTsuNe_76',
+      ),
+      addAPromptObj(
+        currentId + 4,
+        'LinkedIn: cecilthomas23',
+        true,
+        'https://www.linkedin.com/in/cecilthomas23/',
+      ),
+      addAPromptObj(
+        currentId + 2,
+        'Instagram: journeys.cafe',
+        true,
+        'https://www.instagram.com/journeys.cafe/',
+      ),
       addAPromptObj(currentId + 3, 'Email: me@cecil-thomas.com', true),
-      addAPromptObj(currentId + 4, 'GitHub: kitsune21', true),
+      addAPromptObj(
+        currentId + 4,
+        'GitHub: kitsune21',
+        true,
+        'https://github.com/kitsune21',
+      ),
     ]
   },
   regex: /a/,

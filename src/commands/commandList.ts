@@ -29,6 +29,7 @@ export function addAPromptObj(
   currentId: number,
   prompt: string,
   hideTimestamp = false,
+  linkUrl = '',
 ): Prompt {
   return {
     id: currentId,
@@ -36,6 +37,7 @@ export function addAPromptObj(
     source: 'system',
     timestamp: new Date(),
     hideTimestamp: hideTimestamp,
+    link: linkUrl ? linkUrl : '',
   }
 }
 
