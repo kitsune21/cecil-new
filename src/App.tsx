@@ -13,6 +13,7 @@ import {
   PromptInput,
   PromptPreText,
   KnobRow,
+  PromptLink
 } from './components/styledComponents'
 
 function App() {
@@ -125,7 +126,11 @@ function App() {
               ) : (
                 userPreText
               )}
-              {prompt.prompt}
+              {
+                prompt.link ?
+                <PromptLink textColor={textColor} href={prompt.link} target='_blank' rel="noreferrer noopener">{prompt.prompt}</PromptLink>
+                : <span>{prompt.prompt}</span>
+              }
             </Text>
           ))}
           {isBootUp ? (

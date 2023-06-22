@@ -4,6 +4,7 @@ export type Prompt = {
   source: string
   timestamp: Date
   hideTimestamp: boolean
+  link: string
 }
 
 export type BaseCommand = {
