@@ -22,6 +22,7 @@ export function processCommand(
     source: 'user',
     timestamp: new Date(),
     hideTimestamp: false,
+    link: '',
   }
   promptsToAdd.push(userPrompt)
   promptId += 1
@@ -49,6 +50,7 @@ export function processCommand(
                 source: 'system',
                 timestamp: new Date(),
                 hideTimestamp: true,
+                link: '',
               }
               promptId += 1
               listOfCommands.push(listEntry)
@@ -64,6 +66,7 @@ export function processCommand(
             source: 'system',
             timestamp: new Date(),
             hideTimestamp: false,
+            link: '',
           }
           promptsToAdd.push(instructionEntry)
           setAppState('await')
@@ -83,6 +86,7 @@ export function processCommand(
         source: 'system',
         timestamp: new Date(),
         hideTimestamp: false,
+        link: '',
       }
       promptsToAdd.push(exitPrompt)
     } else {
@@ -94,6 +98,7 @@ export function processCommand(
         source: 'system',
         timestamp: new Date(),
         hideTimestamp: false,
+        link: '',
       }
       promptsToAdd.push(resultPrompt)
     }

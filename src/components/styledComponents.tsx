@@ -69,5 +69,8 @@ export const PromptPreText = styled.label`
 `
 
 export const PromptLink = styled.a`
-  color: rgb(0, 0, ${(props: TextColor) => props.textColor});
+  color: rgb(0, ${(props: TextColor) => props.textColor}, ${(props: TextColor) => props.textColor});
+  &:hover {
+    color: rgb(0, ${(props: TextColor) => props.textColor}, 0);
+  }
 `

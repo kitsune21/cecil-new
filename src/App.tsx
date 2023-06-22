@@ -26,7 +26,7 @@ function App() {
   const [backgroundColor, setBackgroundColor] = useState(0)
   const [isBootUp, setIsBootUp] = useState(false)
   const commandPreText = '--  '
-  const userPreText = '@ '
+  const userPreText = '$ '
   const bootTime = 5000
 
   useEffect(() => {
