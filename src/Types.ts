@@ -42,3 +42,11 @@ export type InputColorProps = {
   backgroundColor: number
   textColor: number
 }
+
+export type ScreenshotType = {
+  id: number
+  location: string
+  description: string
+  minified: string
+  alt: string
+}

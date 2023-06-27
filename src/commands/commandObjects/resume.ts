@@ -1,4 +1,4 @@
-import { addAPromptObj } from '../commandList'
+import { addAPromptObj, addAPromptObjCustomSource } from '../commandList'
 import { BaseCommand, Prompt } from '../../Types'
 
 interface ResumeCommand extends BaseCommand {
@@ -156,44 +156,50 @@ export const resumeProjectCommand: ResumeCommand = {
         'The GitHub Repo is currently private. Happy to walk you through any part of it.',
         true,
       ),
-      addAPromptObj(
+      addAPromptObjCustomSource(
         currentId + 4,
+        'View Screenshots',
+        'screenshots',
+        'journeys',
+      ),
+      addAPromptObj(
+        currentId + 5,
         'Frozenspade.TV - Website built for the world record holding speedrunner and Twitch streamer "Frozenspade". Built utilizing react. Integrates with the SpeedRun.Com api to pull the latest speed runs and records.',
         true,
         'https://frozenspade.tv',
       ),
       addAPromptObj(
-        currentId + 5,
+        currentId + 6,
         'GitHub Repo for Frozenspade.TV',
         true,
         'https://github.com/kitsune21/frozenspade',
       ),
       addAPromptObj(
-        currentId + 6,
+        currentId + 7,
         'Toolring.Cecil-Thomas.com - Fun little site for people playing Animal Crossing New Horizons. Gives a filterable table of the fish, bugs, and other collectables that you can find in the game. Built to be mobile friendly.',
         true,
         'https://toolring.cecil-thomas.com',
       ),
       addAPromptObj(
-        currentId + 7,
+        currentId + 8,
         'Benazio Royale - Game submission for the 2022 GMTK Game Jam. I was the main programmer. I also coordinated efforts between our QA, music composer, and art team to make sure it was deliverable in just 48 hours of work.',
         true,
         'https://kitsune-23.itch.io/benazio-royale',
       ),
       addAPromptObj(
-        currentId + 8,
+        currentId + 9,
         'GitHub Repo for Benazio Royale',
         true,
         'https://github.com/kitsunestudio/gmtk2022',
       ),
       addAPromptObj(
-        currentId + 9,
+        currentId + 10,
         'Samba Island - Small game built for fun using Unity. I made it to help bring some awareness to the #TeamSeas fundraiser, which was a charity event to raise money to help clean our oceans.',
         true,
         'https://kitsune-23.itch.io/samba-island',
       ),
       addAPromptObj(
-        currentId + 10,
+        currentId + 11,
         'GitHub Repo for Samba Island',
         true,
         'https://github.com/kitsune21/teamseas-game',

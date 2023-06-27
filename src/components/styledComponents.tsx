@@ -74,3 +74,69 @@ export const PromptLink = styled.a`
     color: rgb(0, ${(props: TextColor) => props.textColor}, 0);
   }
 `
+
+export const ScreenshotButton = styled.button`
+  border: none;
+  color: rgb(0, ${(props: TextColor) => props.textColor}, 0);
+  background-color: ${(props: InputColorProps) =>
+    `rgb(${props.backgroundColor}, ${props.backgroundColor}, ${props.backgroundColor})`};
+  cursor: pointer;
+  margin: 0;
+  padding-left: 10px;
+  padding-top: 5px;
+  font-family: Roboto Condensed;
+`
+
+export const ScreenshotViewerDialog = styled.dialog`
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid rgb(0, ${(props: TextColor) => props.textColor}, 0);;
+  border-radius: 10px;
+  background-color: ${(props: InputColorProps) =>
+    `rgb(${props.backgroundColor}, ${props.backgroundColor}, ${props.backgroundColor})`};
+
+  @media (max-width: 500px) {
+    width: 30%;
+  }
+
+  @media (max-width: 750px) {
+    width: 40%;
+  }
+
+  @media (min-width: 751px) {
+    width: 50%;
+  }
+`
+
+export const ScreenshotImage = styled.img`
+  display: block;
+  @media (max-width: 500px) {
+    width: 10rem;
+  }
+
+  @media (max-width: 750px) {
+    width: 20rem;
+  }
+
+  @media (min-width: 751px) {
+    width: 50rem;
+  }
+`
+
+export const ScreenshotCarousel = styled.div`
+  display: flex;
+  overflow-x: auto;
+`
+
+export const ScreenshotCarouselItem = styled.div`
+  margin: 20px;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 1px;
+`
+
+export const ScreenshotDescription = styled.p`
+  color: rgb(0, ${(props: TextColor) => props.textColor}, 0);
+`

@@ -51,6 +51,22 @@ export function addAPromptObj(
   }
 }
 
+export function addAPromptObjCustomSource(
+  currentId: number,
+  prompt: string,
+  source: string,
+  link: string,
+): Prompt {
+  return {
+    id: currentId,
+    prompt,
+    source: source,
+    timestamp: new Date(),
+    hideTimestamp: true,
+    link: link,
+  }
+}
+
 export const allCommands: BaseCommand[] = [
   clearCommand,
   listCommand,
