@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "description": "This is where users plan their journeys.",
+        "alt": "Shows the journey view with all the days shown. Each day shows all the different items underneath. Items are shown in various colors to denote the type of category they are. Such as items to do with food/eating, items to do with traveling like flights/buses/trains, etc.",
+        "location": "mainscreen.jpg",
+        "minified": ""
+    },
+    {
+        "id": 2,
+        "description": "This shows how you can expand items to get access to edit/delete buttons, and also where you can see notes.",
+        "alt": "Shows the same view as the previous image, but with some items expanded to show the edit/delete buttons. Also shows items that contain notes. In this case the note shows a list of things to bring to the beach.",
+        "location": "mainscreen-expanded-items.jpg",
+        "minified": ""
+    },
+    {
+        "id": 3,
+        "description": "View all your upcoming journeys and how many days left till you head out!",
+        "alt": "Shows the default page of the website. Gives a brief description of the website, a button to view your journeys, and shows a list of upcoming journeys and how many days until the start of the journey.",
+        "location": "listview.jpg",
+        "minified": ""
+    },
+    {
+        "id": 4,
+        "description": "Add comments onto journeys that were shared with you to ask questions about certain plans.",
+        "alt": "Shows the comment tab of a journey.",
+        "location": "comments.jpg",
+        "minified": ""
+    },
+    {
+        "id": 5,
+        "description": "Track all the types of food, or the restaurants that you want to eat at during the planning process. Then add them to your travel plans.",
+        "alt": "Shows the food tab of a journey. In here are different foods or restaurants users would like to try.",
+        "location": "foodscreen.jpg",
+        "minified": ""
+    },
+    {
+        "id": 6,
+        "description": "Share your journey with those who will also be joining you, or people who want to travel to someplace that you've already been.",
+        "alt": "Shows the Shared Journeys tab of the site. From here users can click on links to other user's journeys that have been shared with them.",
+        "location": "shared.jpg",
+        "minified": ""
+    }
+]

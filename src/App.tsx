@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Knob from './components/Knob'
+import ScreenshotViewer from './components/ScreenshotViewer'
 import WelcomeText from './components/WelcomeText'
 import BootUpText from './components/BootUpText'
 import { BaseCommand, Prompt } from './Types'
@@ -13,7 +14,7 @@ import {
   PromptInput,
   PromptPreText,
   KnobRow,
-  PromptLink
+  PromptLink,
 } from './components/styledComponents'
 
 function App() {
@@ -111,6 +112,9 @@ function App() {
             <WelcomeText textColor={textColor} />
           )}
           {promptList.map((prompt: Prompt) => (
+            prompt.source === "screenshots" ?
+            <ScreenshotViewer key={prompt.id} textColor={textColor} backgroundColor={backgroundColor} prompt={prompt} commandPreText={commandPreText}/>
+            :
             <Text
               key={prompt.id}
               textColor={textColor}
@@ -153,7 +157,7 @@ function App() {
         </ComputerMonitor>
       </Computer>
       <ComputerBottom>
-        Thomas Computer Systems v1.0
+        Thomas Computer Systems v1.1
         <KnobRow>
           <Knob
             label="Color"
