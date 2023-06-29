@@ -3,6 +3,7 @@ import Knob from './components/Knob'
 import ScreenshotViewer from './components/ScreenshotViewer'
 import WelcomeText from './components/WelcomeText'
 import BootUpText from './components/BootUpText'
+import PhotoAlbum from './components/PhotoAlbum'
 import { BaseCommand, Prompt } from './Types'
 import { processCommand } from './commands/processCommand'
 import {
@@ -175,6 +176,7 @@ function App() {
           />
         </KnobRow>
       </ComputerBottom>
+      <PhotoAlbum />
     </div>
   )
 }

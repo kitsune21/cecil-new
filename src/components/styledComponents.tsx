@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { ColorProps, TextColor, InputColorProps } from '../Types'
+import { ColorProps, TextColor, InputColorProps, PhotoAlbumProps, PhotoProps } from '../Types'
 
 export const Computer = styled.div`
   padding: 20px;
@@ -139,4 +139,118 @@ export const ScreenshotCarouselItem = styled.div`
 
 export const ScreenshotDescription = styled.p`
   color: rgb(0, ${(props: TextColor) => props.textColor}, 0);
+`
+
+export const PhotoAlbumCover = styled.div`
+  position: absolute;
+  width: ${(props: PhotoAlbumProps) => props.isDraggedOpen ? '50%' : '250px'};
+  height: ${(props: PhotoAlbumProps) => props.isDraggedOpen ? '45rem' : '25px'};
+  bottom: ${(props: PhotoAlbumProps) => props.isDraggedOpen ? '1rem' : '-10px'};
+  left: ${(props: PhotoAlbumProps) => props.isDraggedOpen ? '1rem' : '-5px'};
+  padding: 5px;
+  background-color: sienna;
+  ${(props: PhotoAlbumProps) =>
+    props.isDraggedOpen ?
+    `
+      border: 2px solid black;
+      border-radius: 5px;
+    `
+    :
+    `
+      border: 2px solid black;
+      border-radius: 0 5px 0 0;
+      border-bottom: none;
+      border-left: none;
+    `
+  }
+  & h2 {
+    text-align: center;
+    color: gold;
+  }
+
+  transition: all 0.3s ease;
+`
+
+export const FrontCoverDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`
+
+export const Pages = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: ivory;
+  height: 98%;
+  width: 98%;
+`
+
+export const PageContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 98%;
+  overflow-y: auto;
+`
+
+export const NavigatePages = styled.div`
+  position: absolute;
+  bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex: none;
+  border: 2px solid ivory;
+  border-radius: 5px;
+`
+
+export const NavigateButton = styled.button`
+  border: none;
+  background-color: ivory;
+  cursor: pointer;
+`
+
+export const CoverButton = styled.button`
+  color: gold;
+  padding: 0;
+  margin: 0;
+  float: right;
+  background-color: sienna;
+  border: none;
+  cursor: pointer;
+`
+
+export const PhotoDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: none;
+`
+
+export const Photo = styled.img`
+  width: 38%;
+  align-self: center;
+  border: 2px solid black;
+  border-radius: 2px;
+  &:hover {
+    transform-origin: ${(props: PhotoProps) => props.index > 0 || props.pictureId === props.lastId ? "center" : "top"};
+    transform: scale(2.3);
+    border: 1px solid black;
+  }
+  transition: all 0.2s ease;
+`
+
+export const FrontPhoto = styled.img`
+  width: 20rem;
+  border: 2px solid gold;
+  border-radius: 4px;
+  align-self: center;
+`
+
+export const PhotoDescription = styled.p`
+  width: 80%;
+  align-self: center;
 `
