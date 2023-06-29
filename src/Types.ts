@@ -1,3 +1,5 @@
+import PhotoAlbum from './components/PhotoAlbum'
+
 export type Prompt = {
   id: number
   prompt: string
@@ -49,4 +51,14 @@ export type ScreenshotType = {
   description: string
   minified: string
   alt: string
+}
+
+export type PhotoAlbumProps = {
+  isDraggedOpen: boolean
+}
+
+export type PhotoProps = {
+  index: number
+  pictureId: number
+  lastId: number
 }

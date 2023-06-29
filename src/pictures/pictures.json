@@ -1,0 +1,93 @@
+[
+    {
+        "id": 1,
+        "location": "grand-canyon.jpg",
+        "minified": "",
+        "description": "Even having worked as a tour guide and going to the Grand Canyon probably more than 30 times, it's amazing every time!",
+        "alt": ""
+    },
+    {
+        "id": 2,
+        "location": "curious-doggo.jpg",
+        "minified": "",
+        "description": "Anytime I cook in the kitchen my dog Thylo has to come in and see what is up. I think she knows I'm more likely to drop food than my wife.",
+        "alt": ""
+    },
+    {
+        "id": 3,
+        "location": "happy-doggo.jpg",
+        "minified": "",
+        "description": "My dog being funny!",
+        "alt": ""
+    },
+    {
+        "id": 4,
+        "location": "lazy-cat.jpg",
+        "minified": "",
+        "description": "Just my cat Chirps being lazy.",
+        "alt": ""
+    },
+    {
+        "id": 5,
+        "location": "japan.jpg",
+        "minified": "",
+        "description": "I love Japan! I've gotten to go a few times. This is a temple in Kyoto, that is very famous, called Kinkakuji.",
+        "alt": ""
+    },
+    {
+        "id": 6,
+        "location": "kilarney.jpg",
+        "minified": "",
+        "description": "My wife and I took a jaunting car tour in Kilarney, Ireland. Our guide was so funny! Had all sorts of jokes, and knew a ton about the history. Well worth it.",
+        "alt": ""
+    },
+    {
+        "id": 7,
+        "location": "meeting-my-idol.jpg",
+        "minified": "",
+        "description": "Completely unintentionally ran into my idol while at Disneyland!",
+        "alt": ""
+    },
+    {
+        "id": 8,
+        "location": "bears-having-fun.JPG",
+        "minified": "",
+        "description": "A fun snowy day at the zoo, the bears were out and playing with each other.",
+        "alt": ""
+    },
+    {
+        "id": 9,
+        "location": "kitty.JPG",
+        "minified": "",
+        "description": "If I remember correctly, this is an Arabian Sand Cat. Looks exactly like a house cat to me though!",
+        "alt": ""
+    },
+    {
+        "id": 10,
+        "location": "otter.JPG",
+        "minified": "",
+        "description": "I must have taken 100 pictures trying to get a good picture of the river otters. But this was the best I could do with my skill level...",
+        "alt": ""
+    },
+    {
+        "id": 11,
+        "location": "snow-leopard.JPG",
+        "minified": "",
+        "description": "No matter what size the cat is, they love a big stretch!",
+        "alt": ""
+    },
+    {
+        "id": 12,
+        "location": "tiger.JPG",
+        "minified": "",
+        "description": "Tigers have to be the most beautiful animals. And terrifying. But also cute when they stick their tongues out!",
+        "alt": ""
+    },
+    {
+        "id": 13,
+        "location": "wedding.jpg",
+        "minified": "",
+        "description": "Happiest day of my life!",
+        "alt": ""
+    }
+]
