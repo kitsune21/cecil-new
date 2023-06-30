@@ -1,5 +1,3 @@
-import PhotoAlbum from './components/PhotoAlbum'
-
 export type Prompt = {
   id: number
   prompt: string

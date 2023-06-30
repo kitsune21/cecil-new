@@ -14,6 +14,7 @@ const KnobLabel = styled.p`
 const KnobButtons = styled.div`
   display: flex;
   justify-content: space-evenly;
+  gap: 2px;
 `
 
 const KnobButton = styled.button`
