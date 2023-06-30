@@ -21,7 +21,9 @@ export const aboutCommand: SimpleCommand = {
 }
 
 const whyHireText = `I'm scrappy. I like to get into the weeds of whatever it is I'm building and working on. I am always learning and trying out new things.
-  I know how to take failure and learn from it. I like to build things that I will actually use. (Run the command "sales pitch" to see a great example!)
+  I know how to take failure and learn from it. I like to build things that I will actually use. (Run the command "sales pitch" to see a great example!) 
+  I currently have over a 450 day streak in Duolingo, studying Spanish.
+  I'm as comfortable taking the lead on a project as I am working on the team.
 `
 
 export const whyHireCommand: SimpleCommand = {

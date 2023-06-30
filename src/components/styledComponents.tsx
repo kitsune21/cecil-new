@@ -77,7 +77,7 @@ export const PromptLink = styled.a`
 
 export const ScreenshotButton = styled.button`
   border: none;
-  color: rgb(0, ${(props: TextColor) => props.textColor}, 0);
+  color: rgb(0, ${(props: TextColor) => props.textColor}, ${(props: TextColor) => props.textColor});
   background-color: ${(props: InputColorProps) =>
     `rgb(${props.backgroundColor}, ${props.backgroundColor}, ${props.backgroundColor})`};
   cursor: pointer;
@@ -85,6 +85,10 @@ export const ScreenshotButton = styled.button`
   padding-left: 10px;
   padding-top: 5px;
   font-family: Roboto Condensed;
+  text-decoration: underline;
+  &:hover {
+    color: rgb(0, ${(props: TextColor) => props.textColor}, 0);
+  }
 `
 
 export const ScreenshotViewerDialog = styled.dialog`

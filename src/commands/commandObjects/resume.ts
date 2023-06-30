@@ -123,11 +123,16 @@ export const resumeWorkCommand: ResumeCommand = {
       ),
       addAPromptObj(
         currentId + 3,
-        'Entrata - Customer Resolution Specialist (2018-2020): Provide support for clients over phone, email, and chat. Work with managers to provide training for the support department to help agents be the most efficient that they can.',
+        'Safety Pin - Lead Engineer (2020-2022): Worked with my friend to bootstrap an app for schools/teachers that would allow for faculty to quickly report up when emergencies were happening. Was the sole engineer, built out the app using React, Node, Postgres, and hosting the whole thing on AWS.',
         true,
       ),
       addAPromptObj(
         currentId + 4,
+        'Entrata - Customer Resolution Specialist (2018-2020): Provide support for clients over phone, email, and chat. Work with managers to provide training for the support department to help agents be the most efficient that they can.',
+        true,
+      ),
+      addAPromptObj(
+        currentId + 5,
         "Other random jobs that I've had include: University IT Surplus, University IT Helpdesk, Bank Teller, Japanese Tour Guide, Call Center Quality Assurance Agent. And some more. Ask me sometime about how an old boss tried to recruit me to commit tax fraud ;)",
         true,
       ),
