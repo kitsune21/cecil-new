@@ -1,5 +1,5 @@
 import { addAPromptObj } from '../commandList'
-import { SimpleCommand } from '../../Types'
+import { SimpleCommand, BaseCommand } from '../../Types'
 
 const aboutText =
   'My name is Cecil. I am a software developer in the Salt Lake City area. ' +
@@ -20,17 +20,34 @@ export const aboutCommand: SimpleCommand = {
   awaitCommand: null,
 }
 
-const whyHireText = `I'm scrappy. I like to get into the weeds of whatever it is I'm building and working on. I am always learning and trying out new things.
-  I know how to take failure and learn from it. I like to build things that I will actually use. (Run the command "sales pitch" to see a great example!) 
-  I currently have over a 450 day streak in Duolingo, studying Spanish.
-  I'm as comfortable taking the lead on a project as I am working on the team.
-`
-
-export const whyHireCommand: SimpleCommand = {
+export const whyHireCommand: BaseCommand = {
   command: 'why hire me',
-  process: (currentId: number) => addAPromptObj(currentId, whyHireText),
+  process: (currentId: number) => {
+    return [
+      addAPromptObj(
+        currentId,
+        "#1 - I'm scrappy. I like to build things. I like to take apart things and figure out how and why they work.",
+        true,
+      ),
+      addAPromptObj(
+        currentId + 1,
+        '#2 - Hardly a day goes by that I\'m not working on something, or learning something new. You can see more about my projects using the "resume projects" command. Use the "sales pitch" command to see my current project that is taking up much of my time.',
+        true,
+      ),
+      addAPromptObj(
+        currentId + 2,
+        "#3 - I'm as comfortable taking the lead on a project as I am working on the team. And I have a lot of experience doing both.",
+        true,
+      ),
+      addAPromptObj(
+        currentId + 3,
+        '#4 - I have over a 450 day streak on Duolingo, studying Spanish.',
+        true,
+      ),
+    ]
+  },
   description: 'Shows you why you need to hire me.',
-  type: 'simple',
+  type: 'multi',
   regex: null,
   hide: null,
   awaitCommand: null,
