@@ -1,0 +1,98 @@
+[
+    {
+        "id": 1,
+        "text": "I've seen the Emperor of Japan.",
+        "description": "",
+        "truth": true
+    },
+    {
+        "id": 2,
+        "text": "I have 7 siblings.",
+        "description": "",
+        "truth": false
+    },
+    {
+        "id": 3,
+        "text": "I play the trumpet.",
+        "description": "",
+        "truth": false
+    },
+    {
+        "id": 4,
+        "text": "I like to cook.",
+        "description": "",
+        "truth": true
+    },
+    {
+        "id": 5,
+        "text": "One of my friends is a Red Bull sponsored Super Smash Bros. Melee player.",
+        "description": "",
+        "truth": true
+    },
+    {
+        "id": 6,
+        "text": "As a kid I wanted to be a marine bioligist.",
+        "description": "",
+        "truth": true
+    },
+    {
+        "id": 7,
+        "text": "My name is Latin for blind.",
+        "description": "",
+        "truth": true
+    },
+    {
+        "id": 8,
+        "text": "I have a dog and a cat.",
+        "description": "",
+        "truth": true
+    },
+    {
+        "id": 9,
+        "text": "My favorite animal is the Pangolin.",
+        "description": "",
+        "truth": true
+    },
+    {
+        "id": 10,
+        "text": "I have traveled to every continent, except for Antartica.",
+        "description": "",
+        "truth": false
+    },
+    {
+        "id": 11,
+        "text": "I have competed in some of the largest Super Smash Bros. tournaments in the world.",
+        "description": "",
+        "truth": true
+    },
+    {
+        "id": 12,
+        "text": "I have been an extra in two movies.",
+        "description": "",
+        "truth": false
+    },
+    {
+        "id": 13,
+        "text": "I am allergic to potatos.",
+        "description": "",
+        "truth": true
+    },
+    {
+        "id": 14,
+        "text": "I hold 3 world records for speed running games.",
+        "description": "",
+        "truth": false
+    },
+    {
+        "id": 15,
+        "text": "I lived in Japan for two years.",
+        "description": "",
+        "truth": true
+    },
+    {
+        "id": 16,
+        "text": "I have lived in Utah for most of my life, and have never seen the Delicate Arch.",
+        "description": "",
+        "truth": false
+    }
+]
