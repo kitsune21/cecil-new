@@ -29,11 +29,17 @@ function App() {
   const [isBootUp, setIsBootUp] = useState(false)
   const commandPreText = '--  '
   const userPreText = '$ '
-  const bootTime = 5000
+  const bootTime = 7000
 
   useEffect(() => {
+    if (isBootUp) return
     setTimeout(() => {
       setIsBootUp(true)
+      setPromptList([
+        { id: 1, prompt: 'My name is Cecil, and this is my portfolio site. Take a look around, check out a little photo album in the bottom left, and get to know me a bit.', source: 'system', timestamp: new Date(), hideTimestamp: true, link: '' },
+        { id: 2, prompt: 'To get started use the "list" command to see what I can do!', source: 'system', timestamp: new Date(), hideTimestamp: true, link: '' },
+        { id: 3, prompt: 'Go check out Journeys.Cafe, and solve all your travel planning needs!', source: 'system', timestamp: new Date(), hideTimestamp: true, link: 'https://journeys.cafe' }
+      ])
     }, bootTime)
   })
 
@@ -114,29 +120,29 @@ function App() {
           )}
           {promptList.map((prompt: Prompt) => (
             prompt.source === "screenshots" ?
-            <ScreenshotViewer key={prompt.id} textColor={textColor} backgroundColor={backgroundColor} prompt={prompt} commandPreText={commandPreText}/>
-            :
-            <Text
-              key={prompt.id}
-              textColor={textColor}
-              id={prompt.id.toString()}
-            >
-              {prompt.source !== 'user' ? (
-                <>
-                  <span>{commandPreText}</span>
-                  {!prompt.hideTimestamp ? (
-                    <span> {displayTimeStamp(prompt.timestamp)} </span>
-                  ) : null}
-                </>
-              ) : (
-                userPreText
-              )}
-              {
-                prompt.link ?
-                <PromptLink textColor={textColor} href={prompt.link} target='_blank' rel="noreferrer noopener">{prompt.prompt}</PromptLink>
-                : <span>{prompt.prompt}</span>
-              }
-            </Text>
+              <ScreenshotViewer key={prompt.id} textColor={textColor} backgroundColor={backgroundColor} prompt={prompt} commandPreText={commandPreText} />
+              :
+              <Text
+                key={prompt.id}
+                textColor={textColor}
+                id={prompt.id.toString()}
+              >
+                {prompt.source !== 'user' ? (
+                  <>
+                    <span>{commandPreText}</span>
+                    {!prompt.hideTimestamp ? (
+                      <span> {displayTimeStamp(prompt.timestamp)} </span>
+                    ) : null}
+                  </>
+                ) : (
+                  userPreText
+                )}
+                {
+                  prompt.link ?
+                    <PromptLink textColor={textColor} href={prompt.link} target='_blank' rel="noreferrer noopener">{prompt.prompt}</PromptLink>
+                    : <span>{prompt.prompt}</span>
+                }
+              </Text>
           ))}
           {isBootUp ? (
             <PromptBox onSubmit={handlePromptSubmit}>

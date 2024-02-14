@@ -18,7 +18,12 @@ const BootUpText = ({ textColor, bootTime }: BootUpProps) => {
     { id: 1, text: 'Booting up system', active: false },
     { id: 2, text: 'Checking system configuration', active: false },
     { id: 3, text: 'Initializing drivers', active: false },
-    { id: 4, text: 'Executing start.exe', active: false },
+    { id: 4, text: 'Mounting filesystems', active: false },
+    { id: 5, text: 'Configuring display settings', active: false },
+    { id: 6, text: 'Checking memory allocation', active: false },
+    { id: 7, text: 'Caching initial prompts', active: false },
+    { id: 8, text: 'Starting system services', active: false },
+    { id: 9, text: 'Executing Cecil.OS', active: false }
   ]
   const [bootUpTextList, setBootUpTextList] = useState(textList)
 
