@@ -24,7 +24,7 @@ export const resumeCommand: ResumeCommand = {
       addAPromptObj(currentId, '______Work Summary______'),
       addAPromptObj(
         currentId + 1,
-        'Entrata - Software Engineer I (2022-Current): Led the prototyping and development of the first new features using React/Typescript to speed up the user experience. Worked on projects that refactored and removed no longer used code, and added in unit test coverage using the PHPUnit framework.',
+        'MRIoA - Web Developer (2024-Current): Worked on React/Node.js app development that modernized old C++ apps. Implemented build tools, such as Vite, to improve React app build times by more than half.',
         true,
       ),
       addAPromptObj(
@@ -113,26 +113,31 @@ export const resumeWorkCommand: ResumeCommand = {
       addAPromptObj(currentId, '______Work Summary______'),
       addAPromptObj(
         currentId + 1,
-        'Entrata - Software Engineer I (2022-Current): Led the prototyping and development of the first new features using React/Typescript to speed up the user experience. Worked on projects that refactored and removed no longer used code, and added in unit test coverage using the PHPUnit framework.',
+        'Entrata - Software Engineer I (2022-2023): Led the prototyping and development of the first new features using React/Typescript to speed up the user experience. Worked on projects that refactored and removed no longer used code, and added in unit test coverage using the PHPUnit framework.',
         true,
       ),
       addAPromptObj(
         currentId + 2,
-        'Entrata - Software Development Manager (2020-2022): Worked with more than 38 developers, QA members, and product managers across two teams to develop, test, and release projects and new feature offerings for clients. Worked with my teams to reduce the open bug backlog from over 100 to less than 20. Helped teams in the development of new products that leveraged machine learning.',
+        'Entrata - Software Engineer I (2022-2023): Led the prototyping and development of the first new features using React/Typescript to speed up the user experience. Worked on projects that refactored and removed no longer used code, and added in unit test coverage using the PHPUnit framework.',
         true,
       ),
       addAPromptObj(
         currentId + 3,
-        'Safety Pin - Lead Engineer (2020-2022): Worked with my friend to bootstrap an app for schools/teachers that would allow for faculty to quickly report up when emergencies were happening. Was the sole engineer, built out the app using React, Node, Postgres, and hosting the whole thing on AWS.',
+        'Entrata - Software Development Manager (2020-2022): Worked with more than 38 developers, QA members, and product managers across two teams to develop, test, and release projects and new feature offerings for clients. Worked with my teams to reduce the open bug backlog from over 100 to less than 20. Helped teams in the development of new products that leveraged machine learning.',
         true,
       ),
       addAPromptObj(
         currentId + 4,
-        'Entrata - Customer Resolution Specialist (2018-2020): Provide support for clients over phone, email, and chat. Work with managers to provide training for the support department to help agents be the most efficient that they can.',
+        'Safety Pin - Lead Engineer (2020-2022): Worked with my friend to bootstrap an app for schools/teachers that would allow for faculty to quickly report up when emergencies were happening. Was the sole engineer, built out the app using React, Node, Postgres, and hosting the whole thing on AWS.',
         true,
       ),
       addAPromptObj(
         currentId + 5,
+        'Entrata - Customer Resolution Specialist (2018-2020): Provide support for clients over phone, email, and chat. Work with managers to provide training for the support department to help agents be the most efficient that they can.',
+        true,
+      ),
+      addAPromptObj(
+        currentId + 6,
         "Other random jobs that I've had include: University IT Surplus, University IT Helpdesk, Bank Teller, Japanese Tour Guide, Call Center Quality Assurance Agent. And some more. Ask me sometime about how an old boss tried to recruit me to commit tax fraud ;)",
         true,
       ),
