@@ -1,5 +1,11 @@
 import styled from 'styled-components'
-import { ColorProps, TextColor, InputColorProps, PhotoAlbumProps, PhotoProps } from '../Types'
+import {
+  ColorProps,
+  TextColor,
+  InputColorProps,
+  PhotoAlbumProps,
+  PhotoProps,
+} from '../Types'
 
 export const Computer = styled.div`
   padding: 20px;
@@ -61,6 +67,11 @@ export const PromptInput = styled.input`
     `rgb(${props.backgroundColor}, ${props.backgroundColor}, ${props.backgroundColor})`};
   color: rgb(0, ${(props: InputColorProps) => props.textColor}, 0);
   margin-left: 5px;
+  width: 90%;
+
+  &:focus {
+    outline: none;
+  }
 `
 
 export const PromptPreText = styled.label`
@@ -69,7 +80,11 @@ export const PromptPreText = styled.label`
 `
 
 export const PromptLink = styled.a`
-  color: rgb(0, ${(props: TextColor) => props.textColor}, ${(props: TextColor) => props.textColor});
+  color: rgb(
+    0,
+    ${(props: TextColor) => props.textColor},
+    ${(props: TextColor) => props.textColor}
+  );
   &:hover {
     color: rgb(0, ${(props: TextColor) => props.textColor}, 0);
   }
@@ -77,7 +92,11 @@ export const PromptLink = styled.a`
 
 export const ScreenshotButton = styled.button`
   border: none;
-  color: rgb(0, ${(props: TextColor) => props.textColor}, ${(props: TextColor) => props.textColor});
+  color: rgb(
+    0,
+    ${(props: TextColor) => props.textColor},
+    ${(props: TextColor) => props.textColor}
+  );
   background-color: ${(props: InputColorProps) =>
     `rgb(${props.backgroundColor}, ${props.backgroundColor}, ${props.backgroundColor})`};
   cursor: pointer;
@@ -96,7 +115,7 @@ export const ScreenshotViewerDialog = styled.dialog`
   top: 8%;
   left: 50%;
   transform: translateX(-50%);
-  border: 4px solid rgb(0, ${(props: TextColor) => props.textColor}, 0);;
+  border: 4px solid rgb(0, ${(props: TextColor) => props.textColor}, 0);
   border-radius: 10px;
   background-color: ${(props: InputColorProps) =>
     `rgb(${props.backgroundColor}, ${props.backgroundColor}, ${props.backgroundColor})`};
@@ -147,26 +166,26 @@ export const ScreenshotDescription = styled.p`
 
 export const PhotoAlbumCover = styled.div`
   position: absolute;
-  width: ${(props: PhotoAlbumProps) => props.isDraggedOpen ? '50%' : '250px'};
-  height: ${(props: PhotoAlbumProps) => props.isDraggedOpen ? '45rem' : '25px'};
-  bottom: ${(props: PhotoAlbumProps) => props.isDraggedOpen ? '1rem' : '-10px'};
-  left: ${(props: PhotoAlbumProps) => props.isDraggedOpen ? '1rem' : '-5px'};
+  width: ${(props: PhotoAlbumProps) => (props.isDraggedOpen ? '50%' : '250px')};
+  height: ${(props: PhotoAlbumProps) =>
+    props.isDraggedOpen ? '45rem' : '25px'};
+  bottom: ${(props: PhotoAlbumProps) =>
+    props.isDraggedOpen ? '1rem' : '-10px'};
+  left: ${(props: PhotoAlbumProps) => (props.isDraggedOpen ? '1rem' : '-5px')};
   padding: 5px;
   background-color: sienna;
   ${(props: PhotoAlbumProps) =>
-    props.isDraggedOpen ?
-    `
+    props.isDraggedOpen
+      ? `
       border: 2px solid black;
       border-radius: 5px;
     `
-    :
-    `
+      : `
       border: 2px solid black;
       border-radius: 0 5px 0 0;
       border-bottom: none;
       border-left: none;
-    `
-  }
+    `}
   & h2 {
     text-align: center;
     color: gold;
@@ -240,7 +259,8 @@ export const Photo = styled.img`
   border: 2px solid black;
   border-radius: 2px;
   &:hover {
-    transform-origin: ${(props: PhotoProps) => props.index > 0 || props.pictureId === props.lastId ? "center" : "top"};
+    transform-origin: ${(props: PhotoProps) =>
+      props.index > 0 || props.pictureId === props.lastId ? 'center' : 'top'};
     transform: scale(2.3);
     border: 1px solid black;
   }
