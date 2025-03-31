@@ -225,6 +225,12 @@ export const resumeProjectCommand: ResumeCommand = {
         true,
         'https://github.com/kitsune21/teamseas-game',
       ),
+      addAPromptObj(
+        currentId + 13,
+        'Math.Cecil-Thomas.com - Fun little website for kids to pass off their math times tables.',
+        true,
+        'https://math.cecil-thomas.com',
+      ),
     ]
   },
   description: "Brief overview of all the projects that I've worked on.",
