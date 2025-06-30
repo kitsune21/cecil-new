@@ -41,7 +41,7 @@ export const whyHireCommand: BaseCommand = {
       ),
       addAPromptObj(
         currentId + 3,
-        '#4 - I have over a 1000 day streak on Duolingo, studying Spanish.',
+        '#4 - I had over a 2 year streak on Duolingo, studying Spanish. Moved on to other study methods to level up even further.',
         true,
       ),
     ]

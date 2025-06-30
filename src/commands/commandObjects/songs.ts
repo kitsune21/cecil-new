@@ -65,7 +65,7 @@ export const writeSongCommand = {
 
 export const playSongCommand = {
   command: 'play a song',
-  description: 'Will play a random song.',
+  description: 'Will play a random song. (Volume Warning)',
   type: 'simple',
   process: (currentId: number) => {
     const songs = [

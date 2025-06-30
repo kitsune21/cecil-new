@@ -113,7 +113,7 @@ export const resumeWorkCommand: ResumeCommand = {
       addAPromptObj(currentId, '______Work Summary______'),
       addAPromptObj(
         currentId + 1,
-        'Entrata - Software Engineer I (2022-2023): Led the prototyping and development of the first new features using React/Typescript to speed up the user experience. Worked on projects that refactored and removed no longer used code, and added in unit test coverage using the PHPUnit framework.',
+        'MRIoA - Web Developer (2024-Current): Rebuilt older native C++ apps into Fullstack JavaScript Web Apps. Converted React apps to use Vite, which resulted in a more than 90% increase in speed when it comes to speed and local development.',
         true,
       ),
       addAPromptObj(
